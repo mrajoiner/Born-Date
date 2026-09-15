@@ -92,7 +92,7 @@ export const DobSelector: React.FC<DobSelectorProps> = ({
         </label>
 
         {/* Calendar vs Text Mode Toggle */}
-        <div className="inline-flex items-center p-0.5 bg-[#FAF082]/40 rounded-xl border border-[#090909] text-xs font-semibold">
+        <div className="inline-flex items-center p-0.5 bg-[#FFE600]/40 rounded-xl border border-[#090909] text-xs font-semibold">
           <button
             type="button"
             id={`${id}-mode-text-btn`}
@@ -146,7 +146,7 @@ export const DobSelector: React.FC<DobSelectorProps> = ({
             value={textInput}
             onChange={(e) => handleTextChange(e.target.value)}
             placeholder="e.g. june 8th, 6 mar, 11/7, or 04/21/1973"
-            className="w-full bg-white text-[#090909] text-base px-4 py-3.5 pr-12 rounded-2xl border-2 border-[#090909] focus:bg-[#FAF082]/10 focus:ring-2 focus:ring-[#090909] transition-all font-medium placeholder:text-[#5C584F]/60"
+            className="w-full bg-white text-[#090909] text-base px-4 py-3.5 pr-12 rounded-2xl border-2 border-[#090909] focus:bg-[#FFE600]/10 focus:ring-2 focus:ring-[#090909] transition-all font-medium placeholder:text-[#5C584F]/60"
           />
           {/* Quick Calendar Popout Icon inside input */}
           <button
@@ -154,7 +154,7 @@ export const DobSelector: React.FC<DobSelectorProps> = ({
             id={`${id}-inline-calendar-trigger`}
             title="Open calendar picker"
             onClick={openNativeCalendar}
-            className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-xl text-[#090909] hover:bg-[#FAF082] transition-colors"
+            className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-xl text-[#090909] hover:bg-[#FFE600] transition-colors"
           >
             <Calendar className="w-5 h-5" />
           </button>
@@ -162,7 +162,7 @@ export const DobSelector: React.FC<DobSelectorProps> = ({
       ) : (
         <div className="bg-white p-3 sm:p-4 rounded-2xl border-2 border-[#090909] flex flex-wrap items-center justify-between gap-3 shadow-xs">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#FAF082] border border-[#090909] flex items-center justify-center text-[#090909]">
+            <div className="w-10 h-10 rounded-xl bg-[#FFE600] border border-[#090909] flex items-center justify-center text-[#090909]">
               <Calendar className="w-5 h-5" />
             </div>
             <div>
@@ -178,7 +178,7 @@ export const DobSelector: React.FC<DobSelectorProps> = ({
               type="button"
               id={`${id}-calendar-open-btn`}
               onClick={openNativeCalendar}
-              className="px-4 py-2 bg-[#FAF082] hover:bg-[#F3E768] text-[#090909] font-bold text-xs uppercase tracking-wider rounded-xl border border-[#090909] flex items-center gap-1.5 transition-all shadow-xs"
+              className="px-4 py-2 bg-[#FFE600] hover:bg-[#FFF066] text-[#090909] font-bold text-xs uppercase tracking-wider rounded-xl border border-[#090909] flex items-center gap-1.5 transition-all shadow-xs"
             >
               <Calendar className="w-4 h-4" />
               <span>Choose Date</span>
@@ -196,7 +196,7 @@ export const DobSelector: React.FC<DobSelectorProps> = ({
 
       {/* Real-time System Interpretation Banner */}
       {parsed.isValid ? (
-        <div className="bg-[#FAF082]/30 rounded-xl border border-[#090909] p-2.5 flex flex-wrap items-center justify-between gap-2 text-xs">
+        <div className="bg-[#FFE600]/30 rounded-xl border border-[#090909] p-2.5 flex flex-wrap items-center justify-between gap-2 text-xs">
           <div className="flex items-center gap-2 font-semibold text-[#090909]">
             <span className="w-4 h-4 rounded-full bg-[#090909] text-white flex items-center justify-center text-[10px]">
               <Check className="w-2.5 h-2.5 stroke-[3]" />
@@ -207,7 +207,7 @@ export const DobSelector: React.FC<DobSelectorProps> = ({
           </div>
 
           {parsed.ageTurning !== undefined ? (
-            <span className="bg-[#FAF082] px-2.5 py-0.5 rounded-full border border-[#090909] font-bold text-[#090909]">
+            <span className="bg-[#FFE600] px-2.5 py-0.5 rounded-full border border-[#090909] font-bold text-[#090909]">
               {parsed.ageTurning} years young!
             </span>
           ) : (
@@ -218,7 +218,7 @@ export const DobSelector: React.FC<DobSelectorProps> = ({
                   key={yr}
                   type="button"
                   onClick={() => handleAddYear(yr)}
-                  className="px-1.5 py-0.5 rounded bg-white hover:bg-[#FAF082] border border-[#090909] font-bold text-[#090909] transition-colors"
+                  className="px-1.5 py-0.5 rounded bg-white hover:bg-[#FFE600] border border-[#090909] font-bold text-[#090909] transition-colors"
                 >
                   +{yr} ({2026 - yr}y)
                 </button>
@@ -247,7 +247,7 @@ export const DobSelector: React.FC<DobSelectorProps> = ({
               key={item.label}
               type="button"
               onClick={() => handleApplyPreset(item.val)}
-              className="px-2 py-0.5 rounded-lg bg-[#FAF082]/20 hover:bg-[#FAF082] text-[#090909] border border-[#090909]/40 font-mono text-[10px] transition-colors"
+              className="px-2 py-0.5 rounded-lg bg-[#FFE600]/20 hover:bg-[#FFE600] text-[#090909] border border-[#090909]/40 font-mono text-[10px] transition-colors"
             >
               {item.label}
             </button>

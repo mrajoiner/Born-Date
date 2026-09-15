@@ -115,11 +115,11 @@ export const CelebrationDispatchModal: React.FC<CelebrationDispatchModalProps> =
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
-        <div className="bg-[#090909] text-white p-5 sm:p-6 flex items-center justify-between relative border-b-4 border-[#FAF082]">
+        <div className="bg-[#090909] text-white p-5 sm:p-6 flex items-center justify-between relative border-b-4 border-[#FFE600]">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#FAF082] animate-ping" />
-              <span className="text-[11px] font-bold uppercase tracking-widest text-[#FAF082]">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#FFE600] animate-ping" />
+              <span className="text-[11px] font-bold uppercase tracking-widest text-[#FFE600]">
                 Official Dispatch Hub
               </span>
             </div>
@@ -147,7 +147,7 @@ export const CelebrationDispatchModal: React.FC<CelebrationDispatchModalProps> =
             <Sparkles className="w-4 h-4 text-[#FD9773]" />
             <span>Regular Dispatch Rate: $2.00 per format</span>
           </div>
-          <span className="text-[11px] font-bold text-[#1B3B2B] bg-[#FAF082] px-2.5 py-0.5 rounded-full border border-[#090909]">
+          <span className="text-[11px] font-bold text-[#1B3B2B] bg-[#FFE600] px-2.5 py-0.5 rounded-full border border-[#090909]">
             Special Demo Pass: FREE .PDF Download Today!
           </span>
         </div>
@@ -157,23 +157,23 @@ export const CelebrationDispatchModal: React.FC<CelebrationDispatchModalProps> =
           <button
             type="button"
             onClick={() => setActiveTab("pdf")}
-            className={`py-2.5 px-2 rounded-xl flex items-center justify-center gap-2 transition-all ${
+            className={`py-2.5 px-2 rounded-xl flex items-center justify-center gap-1.5 sm:gap-2 transition-all ${
               activeTab === "pdf"
                 ? "bg-[#090909] text-white shadow-sm"
                 : "text-[#5C584F] hover:bg-white hover:text-[#090909]"
             }`}
           >
-            <Download className="w-4 h-4" />
+            <Download className="w-4 h-4 text-[#FFE600]" />
             <span>Download .PDF</span>
-            <span className="text-[10px] px-1.5 py-0.2 rounded-md bg-[#FAF082] text-[#090909] font-black">
-              FREE
+            <span className="text-[10px] px-1.5 py-0.2 rounded-md bg-[#FFE600] text-[#090909] font-black">
+              ACTIVE
             </span>
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab("email")}
-            className={`py-2.5 px-2 rounded-xl flex items-center justify-center gap-2 transition-all ${
+            className={`py-2.5 px-2 rounded-xl flex items-center justify-center gap-1.5 sm:gap-2 transition-all ${
               activeTab === "email"
                 ? "bg-[#090909] text-white shadow-sm"
                 : "text-[#5C584F] hover:bg-white hover:text-[#090909]"
@@ -181,15 +181,15 @@ export const CelebrationDispatchModal: React.FC<CelebrationDispatchModalProps> =
           >
             <Mail className="w-4 h-4" />
             <span>Email</span>
-            <span className="text-[10px] px-1.5 py-0.2 rounded-md bg-neutral-200 text-[#090909] font-bold">
-              $2
+            <span className="text-[10px] px-1.5 py-0.2 rounded-md bg-neutral-200 text-neutral-600 font-bold">
+              SOON
             </span>
           </button>
 
           <button
             type="button"
             onClick={() => setActiveTab("text")}
-            className={`py-2.5 px-2 rounded-xl flex items-center justify-center gap-2 transition-all ${
+            className={`py-2.5 px-2 rounded-xl flex items-center justify-center gap-1.5 sm:gap-2 transition-all ${
               activeTab === "text"
                 ? "bg-[#090909] text-white shadow-sm"
                 : "text-[#5C584F] hover:bg-white hover:text-[#090909]"
@@ -197,8 +197,8 @@ export const CelebrationDispatchModal: React.FC<CelebrationDispatchModalProps> =
           >
             <MessageSquare className="w-4 h-4" />
             <span>Text / SMS</span>
-            <span className="text-[10px] px-1.5 py-0.2 rounded-md bg-neutral-200 text-[#090909] font-bold">
-              $2
+            <span className="text-[10px] px-1.5 py-0.2 rounded-md bg-neutral-200 text-neutral-600 font-bold">
+              SOON
             </span>
           </button>
         </div>
@@ -212,7 +212,7 @@ export const CelebrationDispatchModal: React.FC<CelebrationDispatchModalProps> =
               <div className="border-2 border-[#090909] rounded-2xl p-5 bg-[#FCF7E5]/50 space-y-3 relative overflow-hidden">
                 <div className="flex items-center justify-between border-b border-[#E7E0D1] pb-3">
                   <div className="flex items-center gap-2">
-                    <div className="w-9 h-9 rounded-xl bg-[#090909] text-[#FAF082] flex items-center justify-center">
+                    <div className="w-9 h-9 rounded-xl bg-[#090909] text-[#FFE600] flex items-center justify-center">
                       <FileText className="w-5 h-5" />
                     </div>
                     <div>
@@ -226,7 +226,7 @@ export const CelebrationDispatchModal: React.FC<CelebrationDispatchModalProps> =
                   </div>
                   <div className="text-right">
                     <span className="text-xs line-through text-[#5C584F] mr-1.5">$2.00</span>
-                    <span className="text-sm font-black text-[#1B3B2B] bg-[#FAF082] px-2.5 py-0.5 rounded-lg border border-[#090909]">
+                    <span className="text-sm font-black text-[#1B3B2B] bg-[#FFE600] px-2.5 py-0.5 rounded-lg border border-[#090909]">
                       $0.00
                     </span>
                   </div>
@@ -258,7 +258,7 @@ export const CelebrationDispatchModal: React.FC<CelebrationDispatchModalProps> =
               </div>
 
               {pdfDownloaded && (
-                <div className="p-3.5 rounded-xl bg-[#FAF082]/40 border-2 border-[#090909] text-xs font-bold text-[#090909] flex items-center justify-between animate-fadeIn">
+                <div className="p-3.5 rounded-xl bg-[#FFE600]/40 border-2 border-[#090909] text-xs font-bold text-[#090909] flex items-center justify-between animate-fadeIn">
                   <div className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-[#1B3B2B] stroke-[3]" />
                     <span>Your on-brand .PDF was downloaded successfully! Check your downloads folder.</span>
@@ -284,7 +284,7 @@ export const CelebrationDispatchModal: React.FC<CelebrationDispatchModalProps> =
                   </>
                 ) : (
                   <>
-                    <Download className="w-5 h-5 text-[#FAF082]" />
+                    <Download className="w-5 h-5 text-[#FFE600]" />
                     <span>Download On-Brand .PDF (Free Demo Pass)</span>
                   </>
                 )}
@@ -292,7 +292,7 @@ export const CelebrationDispatchModal: React.FC<CelebrationDispatchModalProps> =
             </div>
           )}
 
-          {/* TAB 2: EMAIL PLAN */}
+          {/* TAB 2: EMAIL PLAN (SHOWN, NOT ENABLED) */}
           {activeTab === "email" && (
             <div className="space-y-4 animate-fadeIn">
               <div className="flex items-center justify-between border-b border-[#E7E0D1] pb-2">
@@ -304,23 +304,34 @@ export const CelebrationDispatchModal: React.FC<CelebrationDispatchModalProps> =
                     Sends a beautifully formatted email with full schedule and dinner reservations.
                   </p>
                 </div>
-                <span className="text-xs font-bold bg-[#FAF082] px-2.5 py-1 rounded-lg border border-[#090909]">
-                  Cost: $2.00
+                <span className="text-xs font-bold bg-neutral-100 text-neutral-600 px-2.5 py-1 rounded-lg border border-neutral-300">
+                  Feature Rolling Out Soon
                 </span>
               </div>
 
-              <form onSubmit={handleSendEmail} className="space-y-3.5">
+              {/* Informative Notice Banner */}
+              <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-950 flex items-start gap-2.5">
+                <Sparkles className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+                <div className="space-y-0.5">
+                  <p className="font-bold">Email Dispatch Is Rolling Out Soon</p>
+                  <p className="text-amber-800 text-[11px] leading-relaxed">
+                    Direct email dispatch and calendar invite syncing are being finalized. To share this masterplan right now with no delays, use the free <strong>Download .PDF</strong> option!
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-3.5 opacity-60">
                 <div className="space-y-1">
                   <label className="text-xs font-bold uppercase tracking-wider text-[#090909]">
                     Recipient Email Address
                   </label>
                   <input
                     type="email"
-                    required
+                    disabled={true}
                     value={emailAddress}
                     onChange={(e) => setEmailAddress(e.target.value)}
                     placeholder="guest@example.com"
-                    className="w-full bg-white text-[#090909] text-sm px-4 py-3 rounded-xl border-2 border-[#090909] outline-none focus:ring-2 focus:ring-[#FAF082] placeholder:text-[#5C584F]/50 font-medium"
+                    className="w-full bg-neutral-100 text-[#090909] text-sm px-4 py-3 rounded-xl border-2 border-neutral-300 outline-none cursor-not-allowed font-medium"
                   />
                 </div>
 
@@ -330,10 +341,11 @@ export const CelebrationDispatchModal: React.FC<CelebrationDispatchModalProps> =
                   </label>
                   <input
                     type="text"
+                    disabled={true}
                     value={emailSenderName}
                     onChange={(e) => setEmailSenderName(e.target.value)}
                     placeholder="Your Name"
-                    className="w-full bg-white text-[#090909] text-sm px-4 py-3 rounded-xl border-2 border-[#090909] outline-none focus:ring-2 focus:ring-[#FAF082] placeholder:text-[#5C584F]/50 font-medium"
+                    className="w-full bg-neutral-100 text-[#090909] text-sm px-4 py-3 rounded-xl border-2 border-neutral-300 outline-none cursor-not-allowed font-medium"
                   />
                 </div>
 
@@ -343,51 +355,37 @@ export const CelebrationDispatchModal: React.FC<CelebrationDispatchModalProps> =
                   </label>
                   <textarea
                     rows={2}
+                    disabled={true}
                     value={emailNote}
                     onChange={(e) => setEmailNote(e.target.value)}
-                    className="w-full bg-white text-[#090909] text-xs p-3 rounded-xl border-2 border-[#090909] outline-none focus:ring-2 focus:ring-[#FAF082] placeholder:text-[#5C584F]/50 font-medium resize-none"
+                    className="w-full bg-neutral-100 text-[#090909] text-xs p-3 rounded-xl border-2 border-neutral-300 outline-none cursor-not-allowed font-medium resize-none"
                   />
                 </div>
+              </div>
 
-                {emailSent && (
-                  <div className="p-3.5 rounded-xl bg-[#FAF082]/40 border-2 border-[#090909] text-xs font-bold text-[#090909] flex items-center gap-2 animate-fadeIn">
-                    <Check className="w-4 h-4 text-[#1B3B2B] stroke-[3]" />
-                    <span>Email successfully dispatched to {emailAddress}! Receipt logged.</span>
-                  </div>
-                )}
+              <div className="pt-2 flex flex-col sm:flex-row items-center gap-2.5">
+                <button
+                  type="button"
+                  disabled={true}
+                  className="w-full sm:flex-1 bg-neutral-200 text-neutral-500 font-bold text-sm py-3.5 px-4 rounded-xl border border-neutral-300 cursor-not-allowed flex items-center justify-center gap-2 select-none"
+                >
+                  <Mail className="w-4 h-4 text-neutral-400" />
+                  <span>Email Dispatch (Rolling Out Soon)</span>
+                </button>
 
-                <div className="pt-2 flex flex-col sm:flex-row items-center gap-2.5">
-                  <button
-                    type="submit"
-                    disabled={isSendingEmail}
-                    className="w-full sm:flex-1 bg-[#090909] hover:bg-neutral-800 text-white font-bold text-sm py-3.5 px-4 rounded-xl border-2 border-[#090909] transition-all flex items-center justify-center gap-2 shadow-sm"
-                  >
-                    {isSendingEmail ? (
-                      <>
-                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        <span>Sending ($2 charge)...</span>
-                      </>
-                    ) : (
-                      <>
-                        <Mail className="w-4 h-4 text-[#FAF082]" />
-                        <span>Send Email ($2.00)</span>
-                      </>
-                    )}
-                  </button>
-
-                  <a
-                    href={`mailto:${emailAddress}?subject=${emailSubject}&body=${emailBodyText}`}
-                    className="w-full sm:w-auto text-xs font-bold text-[#090909] bg-white hover:bg-[#FCF7E5] py-3.5 px-4 rounded-xl border-2 border-[#090909] flex items-center justify-center gap-1.5 transition-colors"
-                  >
-                    <ExternalLink className="w-3.5 h-3.5" />
-                    <span>Open in Mail App</span>
-                  </a>
-                </div>
-              </form>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("pdf")}
+                  className="w-full sm:w-auto text-xs font-bold text-[#090909] bg-[#FFE600] hover:bg-yellow-300 active:scale-95 py-3.5 px-4 rounded-xl border-2 border-[#090909] flex items-center justify-center gap-1.5 transition-colors shadow-2xs"
+                >
+                  <Download className="w-3.5 h-3.5 text-[#090909]" />
+                  <span>Download .PDF (Active & Free)</span>
+                </button>
+              </div>
             </div>
           )}
 
-          {/* TAB 3: TEXT / SMS PLAN */}
+          {/* TAB 3: TEXT / SMS PLAN (SHOWN, NOT ENABLED) */}
           {activeTab === "text" && (
             <div className="space-y-4 animate-fadeIn">
               <div className="flex items-center justify-between border-b border-[#E7E0D1] pb-2">
@@ -399,12 +397,23 @@ export const CelebrationDispatchModal: React.FC<CelebrationDispatchModalProps> =
                     Sends a quick-glance mobile SMS with date, timing, dining stop, and dress vibe.
                   </p>
                 </div>
-                <span className="text-xs font-bold bg-[#FAF082] px-2.5 py-1 rounded-lg border border-[#090909]">
-                  Cost: $2.00
+                <span className="text-xs font-bold bg-neutral-100 text-neutral-600 px-2.5 py-1 rounded-lg border border-neutral-300">
+                  Feature Rolling Out Soon
                 </span>
               </div>
 
-              <form onSubmit={handleSendText} className="space-y-3.5">
+              {/* Informative Notice Banner */}
+              <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-950 flex items-start gap-2.5">
+                <Sparkles className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+                <div className="space-y-0.5">
+                  <p className="font-bold">SMS / Text Dispatch Is Rolling Out Soon</p>
+                  <p className="text-amber-800 text-[11px] leading-relaxed">
+                    Automated SMS broadcast messaging is currently in testing. For immediate instant sharing with guests, download the full on-brand .PDF masterplan!
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-3.5 opacity-60">
                 <div className="space-y-1">
                   <label className="text-xs font-bold uppercase tracking-wider text-[#090909] flex items-center gap-1.5">
                     <Phone className="w-3.5 h-3.5" />
@@ -412,11 +421,11 @@ export const CelebrationDispatchModal: React.FC<CelebrationDispatchModalProps> =
                   </label>
                   <input
                     type="tel"
-                    required
+                    disabled={true}
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
                     placeholder="(555) 019-2834"
-                    className="w-full bg-white text-[#090909] text-sm px-4 py-3 rounded-xl border-2 border-[#090909] outline-none focus:ring-2 focus:ring-[#FAF082] placeholder:text-[#5C584F]/50 font-medium"
+                    className="w-full bg-neutral-100 text-[#090909] text-sm px-4 py-3 rounded-xl border-2 border-neutral-300 outline-none cursor-not-allowed font-medium"
                   />
                 </div>
 
@@ -429,42 +438,27 @@ export const CelebrationDispatchModal: React.FC<CelebrationDispatchModalProps> =
                     🎉 Born Day Alert! Here's the plan for {honoree} in {profile.location} on {plan.birthdayOverview.celebrationDate}: Kickoff {plan.timeline[0]?.time || "afternoon"} at {plan.timeline[0]?.title}. Dinner at {plan.foodAndCake.sampleFoodOptions[0]?.name || "featured spot"}. Dress vibe: {plan.themeAndMood.mood}.
                   </div>
                 </div>
+              </div>
 
-                {textSent && (
-                  <div className="p-3.5 rounded-xl bg-[#FAF082]/40 border-2 border-[#090909] text-xs font-bold text-[#090909] flex items-center gap-2 animate-fadeIn">
-                    <Check className="w-4 h-4 text-[#1B3B2B] stroke-[3]" />
-                    <span>Text alert successfully transmitted to {phoneNumber}!</span>
-                  </div>
-                )}
+              <div className="pt-2 flex flex-col sm:flex-row items-center gap-2.5">
+                <button
+                  type="button"
+                  disabled={true}
+                  className="w-full sm:flex-1 bg-neutral-200 text-neutral-500 font-bold text-sm py-3.5 px-4 rounded-xl border border-neutral-300 cursor-not-allowed flex items-center justify-center gap-2 select-none"
+                >
+                  <MessageSquare className="w-4 h-4 text-neutral-400" />
+                  <span>SMS Dispatch (Rolling Out Soon)</span>
+                </button>
 
-                <div className="pt-2 flex flex-col sm:flex-row items-center gap-2.5">
-                  <button
-                    type="submit"
-                    disabled={isSendingText}
-                    className="w-full sm:flex-1 bg-[#090909] hover:bg-neutral-800 text-white font-bold text-sm py-3.5 px-4 rounded-xl border-2 border-[#090909] transition-all flex items-center justify-center gap-2 shadow-sm"
-                  >
-                    {isSendingText ? (
-                      <>
-                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        <span>Sending SMS ($2 charge)...</span>
-                      </>
-                    ) : (
-                      <>
-                        <MessageSquare className="w-4 h-4 text-[#FAF082]" />
-                        <span>Send Text Alert ($2.00)</span>
-                      </>
-                    )}
-                  </button>
-
-                  <a
-                    href={`sms:${phoneNumber}?body=${smsText}`}
-                    className="w-full sm:w-auto text-xs font-bold text-[#090909] bg-white hover:bg-[#FCF7E5] py-3.5 px-4 rounded-xl border-2 border-[#090909] flex items-center justify-center gap-1.5 transition-colors"
-                  >
-                    <ExternalLink className="w-3.5 h-3.5" />
-                    <span>Open Messages App</span>
-                  </a>
-                </div>
-              </form>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("pdf")}
+                  className="w-full sm:w-auto text-xs font-bold text-[#090909] bg-[#FFE600] hover:bg-yellow-300 active:scale-95 py-3.5 px-4 rounded-xl border-2 border-[#090909] flex items-center justify-center gap-1.5 transition-colors shadow-2xs"
+                >
+                  <Download className="w-3.5 h-3.5 text-[#090909]" />
+                  <span>Download .PDF (Active & Free)</span>
+                </button>
+              </div>
             </div>
           )}
         </div>

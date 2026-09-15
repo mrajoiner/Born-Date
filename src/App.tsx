@@ -221,7 +221,7 @@ export default function App() {
   };
 
   const handleStartOver = () => {
-    if (plan) {
+    if (plan || profile.fullName || profile.location) {
       setIsNewPlanModalOpen(true);
     } else {
       handleDiscardAndCreateNew();

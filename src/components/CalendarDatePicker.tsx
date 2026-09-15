@@ -183,7 +183,7 @@ export const CalendarDatePicker: React.FC<CalendarDatePickerProps> = ({
           onChange={(e) => handleTextChange(e.target.value)}
           onFocus={() => setIsOpen(true)}
           placeholder={placeholder}
-          className="w-full bg-white text-[#090909] text-base px-4 py-3.5 pr-24 rounded-2xl border-2 border-[#090909] focus:bg-[#FAF082]/10 focus:ring-2 focus:ring-[#090909] outline-none transition-all font-medium placeholder:text-[#5C584F]/50 shadow-2xs"
+          className="w-full bg-white text-[#090909] text-base px-4 py-3.5 pr-24 rounded-2xl border-2 border-[#090909] focus:bg-[#FFE600]/10 focus:ring-2 focus:ring-[#090909] outline-none transition-all font-medium placeholder:text-[#5C584F]/50 shadow-2xs"
         />
 
         {/* Clear & Calendar action buttons */}
@@ -206,7 +206,7 @@ export const CalendarDatePicker: React.FC<CalendarDatePickerProps> = ({
             className={`p-2 rounded-xl border transition-all flex items-center gap-1.5 ${
               isOpen
                 ? "bg-[#090909] text-white border-[#090909]"
-                : "bg-[#FAF082] text-[#090909] border-[#090909] hover:bg-[#F3E768]"
+                : "bg-[#FFE600] text-[#090909] border-[#090909] hover:bg-[#FFF066]"
             }`}
             title="Open interactive calendar date picker"
           >
@@ -220,7 +220,7 @@ export const CalendarDatePicker: React.FC<CalendarDatePickerProps> = ({
 
       {/* Live Interpretation Badge */}
       {parsed.isValid ? (
-        <div className="bg-[#FAF082]/30 rounded-xl border border-[#090909] px-3 py-2 flex flex-wrap items-center justify-between gap-2 text-xs">
+        <div className="bg-[#FFE600]/30 rounded-xl border border-[#090909] px-3 py-2 flex flex-wrap items-center justify-between gap-2 text-xs">
           <div className="flex items-center gap-2 font-semibold text-[#090909]">
             <span className="w-4 h-4 rounded-full bg-[#090909] text-white flex items-center justify-center text-[10px]">
               <Check className="w-2.5 h-2.5 stroke-[3]" />
@@ -231,7 +231,7 @@ export const CalendarDatePicker: React.FC<CalendarDatePickerProps> = ({
           </div>
 
           {parsed.ageTurning !== undefined ? (
-            <span className="bg-[#FAF082] px-2.5 py-0.5 rounded-full border border-[#090909] font-bold text-[#090909]">
+            <span className="bg-[#FFE600] px-2.5 py-0.5 rounded-full border border-[#090909] font-bold text-[#090909]">
               Turning {parsed.ageTurning} in 2026!
             </span>
           ) : (
@@ -293,7 +293,7 @@ export const CalendarDatePicker: React.FC<CalendarDatePickerProps> = ({
                 aria-label="Select year"
                 value={viewYear}
                 onChange={(e) => handleYearChange(Number(e.target.value))}
-                className="bg-[#FAF082] text-[#090909] font-bold text-xs px-2.5 py-1.5 rounded-xl border border-[#090909] focus:outline-none cursor-pointer"
+                className="bg-[#FFE600] text-[#090909] font-bold text-xs px-2.5 py-1.5 rounded-xl border border-[#090909] focus:outline-none cursor-pointer"
               >
                 {yearOptions.map((yr) => (
                   <option key={yr} value={yr}>
@@ -336,8 +336,8 @@ export const CalendarDatePicker: React.FC<CalendarDatePickerProps> = ({
                   onClick={() => handleSelectDay(dayNum)}
                   className={`h-9 rounded-xl text-xs font-semibold flex items-center justify-center transition-all ${
                     isSelected
-                      ? "bg-[#090909] text-[#FAF082] font-bold shadow-sm scale-105 border border-[#090909]"
-                      : "hover:bg-[#FAF082] text-[#090909] hover:font-bold"
+                      ? "bg-[#090909] text-[#FFE600] font-bold shadow-sm scale-105 border border-[#090909]"
+                      : "hover:bg-[#FFE600] text-[#090909] hover:font-bold"
                   }`}
                 >
                   {dayNum}
@@ -380,7 +380,7 @@ export const CalendarDatePicker: React.FC<CalendarDatePickerProps> = ({
               key={pill.label}
               type="button"
               onClick={() => handleTextChange(pill.val)}
-              className="px-2 py-0.5 rounded-lg bg-[#FAF082]/20 hover:bg-[#FAF082] text-[#090909] border border-[#090909]/40 font-medium text-[11px] transition-colors"
+              className="px-2 py-0.5 rounded-lg bg-[#FFE600]/20 hover:bg-[#FFE600] text-[#090909] border border-[#090909]/40 font-medium text-[11px] transition-colors"
             >
               {pill.label}
             </button>

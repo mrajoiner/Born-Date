@@ -109,7 +109,7 @@ export const RefinementChat: React.FC<RefinementChatProps> = ({
                   id={`quick-action-btn-${idx}`}
                   onClick={() => onQuickAction(action.prompt)}
                   disabled={isLoading}
-                  className="bg-[#FCF7E5] hover:bg-[#FAF082] text-[#090909] text-xs font-bold px-3.5 py-2 rounded-full border border-[#090909] active:scale-95 transition-all flex items-center gap-1.5 disabled:opacity-50"
+                  className="bg-[#FCF7E5] hover:bg-[#FFE600] text-[#090909] text-xs font-bold px-3.5 py-2 rounded-full border border-[#090909] active:scale-95 transition-all flex items-center gap-1.5 disabled:opacity-50"
                 >
                   <Icon className="w-3.5 h-3.5 text-[#090909]" />
                   <span>{action.label}</span>
@@ -141,7 +141,7 @@ export const RefinementChat: React.FC<RefinementChatProps> = ({
                   className={`flex items-start gap-2.5 ${isUser ? "justify-end" : "justify-start"}`}
                 >
                   {!isUser && (
-                    <div className="w-7 h-7 rounded-full bg-[#FAF082] border border-[#090909] flex items-center justify-center flex-shrink-0 mt-1">
+                    <div className="w-7 h-7 rounded-full bg-[#FFE600] border border-[#090909] flex items-center justify-center flex-shrink-0 mt-1">
                       <IconBirthdayCake className="w-4 h-4 text-[#090909]" />
                     </div>
                   )}
@@ -164,7 +164,7 @@ export const RefinementChat: React.FC<RefinementChatProps> = ({
 
                     {/* Diff notice if assistant modified the plan */}
                     {msg.whatChanged && (
-                      <div className="mt-2.5 pt-2 border-t border-[#090909]/15 text-xs text-[#090909] bg-[#FAF082] rounded-xl p-2.5 space-y-1">
+                      <div className="mt-2.5 pt-2 border-t border-[#090909]/15 text-xs text-[#090909] bg-[#FFE600] rounded-xl p-2.5 space-y-1">
                         <div className="flex items-center gap-1.5 font-bold">
                           <IconSparkle className="w-3.5 h-3.5" />
                           <span>Plan Updated:</span>
@@ -187,7 +187,7 @@ export const RefinementChat: React.FC<RefinementChatProps> = ({
           {/* Loading Indicator */}
           {isLoading && (
             <div className="flex items-start gap-2.5">
-              <div className="w-7 h-7 rounded-full bg-[#FAF082] border border-[#090909] flex items-center justify-center flex-shrink-0">
+              <div className="w-7 h-7 rounded-full bg-[#FFE600] border border-[#090909] flex items-center justify-center flex-shrink-0">
                 <RefreshCw className="w-3.5 h-3.5 text-[#090909] animate-spin" />
               </div>
               <div className="bg-white border-2 border-[#090909] rounded-2xl rounded-tl-xs p-3.5 shadow-2xs">
@@ -211,7 +211,7 @@ export const RefinementChat: React.FC<RefinementChatProps> = ({
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               disabled={isLoading}
-              className="w-full bg-white text-sm text-[#090909] border-2 border-[#090909] rounded-2xl px-4 py-3.5 outline-none focus:ring-2 focus:ring-[#FAF082] placeholder:text-[#5C584F]/50 transition-all disabled:opacity-50"
+              className="w-full bg-white text-sm text-[#090909] border-2 border-[#090909] rounded-2xl px-4 py-3.5 outline-none focus:ring-2 focus:ring-[#FFE600] placeholder:text-[#5C584F]/50 transition-all disabled:opacity-50"
             />
           </div>
 
@@ -221,7 +221,7 @@ export const RefinementChat: React.FC<RefinementChatProps> = ({
             disabled={!inputText.trim() || isLoading}
             className="bg-[#090909] text-white hover:bg-neutral-800 active:scale-95 disabled:opacity-40 font-bold px-5 py-3.5 rounded-2xl border-2 border-[#090909] transition-all flex items-center justify-center gap-2"
           >
-            <Send className="w-4 h-4 text-[#FAF082]" />
+            <Send className="w-4 h-4 text-[#FFE600]" />
             <span className="hidden sm:inline text-xs uppercase tracking-wider">Send</span>
           </button>
         </form>

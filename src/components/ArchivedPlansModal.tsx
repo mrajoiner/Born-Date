@@ -69,11 +69,11 @@ export const ArchivedPlansModal: React.FC<ArchivedPlansModalProps> = ({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="bg-[#090909] text-white p-5 sm:p-6 border-b-4 border-[#FAF082] flex items-center justify-between">
+        <div className="bg-[#090909] text-white p-5 sm:p-6 border-b-4 border-[#FFE600] flex items-center justify-between">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#FAF082] animate-ping" />
-              <span className="text-[11px] font-bold uppercase tracking-widest text-[#FAF082]">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#FFE600] animate-ping" />
+              <span className="text-[11px] font-bold uppercase tracking-widest text-[#FFE600]">
                 Plan Archives Vault
               </span>
             </div>
@@ -106,7 +106,7 @@ export const ArchivedPlansModal: React.FC<ArchivedPlansModalProps> = ({
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search by VIP name, city, or theme..."
-              className="w-full bg-white text-[#090909] text-xs pl-9 pr-3.5 py-2.5 rounded-xl border border-[#090909] outline-none focus:ring-2 focus:ring-[#FAF082] placeholder:text-[#5C584F]/60"
+              className="w-full bg-white text-[#090909] text-xs pl-9 pr-3.5 py-2.5 rounded-xl border border-[#090909] outline-none focus:ring-2 focus:ring-[#FFE600] placeholder:text-[#5C584F]/60"
             />
           </div>
 
@@ -130,7 +130,7 @@ export const ArchivedPlansModal: React.FC<ArchivedPlansModalProps> = ({
         <div className="p-4 sm:p-6 overflow-y-auto space-y-3.5 flex-1 bg-neutral-50/50">
           {archives.length === 0 ? (
             <div className="text-center py-12 px-4 space-y-3">
-              <div className="w-14 h-14 rounded-2xl bg-[#FAF082] border-2 border-[#090909] mx-auto flex items-center justify-center text-[#090909] shadow-xs">
+              <div className="w-14 h-14 rounded-2xl bg-[#FFE600] border-2 border-[#090909] mx-auto flex items-center justify-center text-[#090909] shadow-xs">
                 <Archive className="w-7 h-7" />
               </div>
               <h4 className="font-serif-display font-bold text-lg text-[#090909]">
@@ -165,7 +165,7 @@ export const ArchivedPlansModal: React.FC<ArchivedPlansModalProps> = ({
                         <h4 className="font-serif-display font-bold text-base sm:text-lg text-[#090909]">
                           {item.celebrantName}’s Birthday Plan
                         </h4>
-                        <span className="text-[10px] font-bold bg-[#FAF082] text-[#090909] px-2 py-0.5 rounded-full border border-[#090909]">
+                        <span className="text-[10px] font-bold bg-[#FFE600] text-[#090909] px-2 py-0.5 rounded-full border border-[#090909]">
                           Turning {item.ageTurning}
                         </span>
                       </div>
@@ -208,7 +208,7 @@ export const ArchivedPlansModal: React.FC<ArchivedPlansModalProps> = ({
                           onRestorePlan(item);
                           onClose();
                         }}
-                        className="text-xs font-bold text-[#090909] bg-[#FAF082] hover:bg-yellow-300 px-3.5 py-2 rounded-xl border border-[#090909] flex items-center gap-1.5 transition-colors shadow-2xs"
+                        className="text-xs font-bold text-[#090909] bg-[#FFE600] hover:bg-yellow-300 px-3.5 py-2 rounded-xl border border-[#090909] flex items-center gap-1.5 transition-colors shadow-2xs"
                       >
                         <RotateCcw className="w-3.5 h-3.5" />
                         <span>Restore to Active</span>

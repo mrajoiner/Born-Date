@@ -37,7 +37,7 @@ export const MilesFigure: React.FC<CharacterProps> = ({
         <g id="miles-hat">
           <path
             d="M 94 48 L 108 12 L 122 46 Z"
-            fill="#FAF082"
+            fill="#FFE600"
             stroke="#090909"
             strokeWidth="3"
             strokeLinejoin="round"
@@ -188,7 +188,7 @@ export const MilesFigure: React.FC<CharacterProps> = ({
             width="128"
             height="38"
             rx="5"
-            fill="#FAF082"
+            fill="#FFE600"
             stroke="#090909"
             strokeWidth="1.5"
             strokeDasharray="4 2"
@@ -276,14 +276,14 @@ export const ArloFigure: React.FC<CharacterProps> = ({
         <g id="arlo-clip">
           <path
             d="M 120 38 L 132 30 L 126 42 Z"
-            fill="#FAF082"
+            fill="#FFE600"
             stroke="#090909"
             strokeWidth="2.5"
             strokeLinejoin="round"
           />
           <circle cx="120" cy="38" r="3.5" fill="#090909" />
           {/* Party sparkle stars above hair */}
-          <path d="M 72 25 L 75 33 L 83 36 L 75 39 L 72 47 L 69 39 L 61 36 L 69 33 Z" fill="#FAF082" stroke="#090909" strokeWidth="1.5" />
+          <path d="M 72 25 L 75 33 L 83 36 L 75 39 L 72 47 L 69 39 L 61 36 L 69 33 Z" fill="#FFE600" stroke="#090909" strokeWidth="1.5" />
         </g>
 
         {/* Back of Bob hair */}
@@ -359,7 +359,7 @@ export const ArloFigure: React.FC<CharacterProps> = ({
           strokeWidth="3.5"
           strokeLinejoin="round"
         />
-        <path d="M 91 87 Q 100 95 110 87" stroke="#090909" strokeWidth="2" fill="#FAF082" />
+        <path d="M 91 87 Q 100 95 110 87" stroke="#090909" strokeWidth="2" fill="#FFE600" />
 
         {/* Rosy blush lines */}
         <path d="M 76 81 L 80 84" stroke="#090909" strokeWidth="1.5" strokeLinecap="round" />
@@ -413,7 +413,7 @@ export const ArloFigure: React.FC<CharacterProps> = ({
             width="128"
             height="38"
             rx="5"
-            fill="#FAF082"
+            fill="#FFE600"
             stroke="#090909"
             strokeWidth="1.5"
             strokeDasharray="4 2"
@@ -530,7 +530,7 @@ export const SoloGuide: React.FC<{
       <div className="max-w-lg bg-white border-2 border-[#090909] rounded-3xl p-5 shadow-xs relative">
         <div className="hidden sm:block absolute -left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 bg-white border-l-2 border-b-2 border-[#090909] -rotate-45" />
         <div className="flex items-center gap-2 mb-1.5">
-          <span className="text-[10px] font-extrabold uppercase tracking-wider bg-[#FAF082] px-2 py-0.5 rounded-full border border-[#090909]">
+          <span className="text-[10px] font-extrabold uppercase tracking-wider bg-[#FFE600] px-2 py-0.5 rounded-full border border-[#090909]">
             {character === "miles" ? "Miles" : "Arlo"} • Birthday Guide
           </span>
           {title && (

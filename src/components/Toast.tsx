@@ -35,7 +35,7 @@ export const Toast: React.FC<ToastProps> = ({ toast, onDismiss }) => {
         }`}
       >
         {toast.type === "success" ? (
-          <CheckCircle className="w-4 h-4 text-[#FAF082]" />
+          <CheckCircle className="w-4 h-4 text-[#FFE600]" />
         ) : toast.type === "error" ? (
           <AlertCircle className="w-4 h-4 text-red-300" />
         ) : null}

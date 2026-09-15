@@ -25,7 +25,7 @@ export const FALLBACK_INITIAL_PLAN: BirthdayPlan = {
   themeAndMood: {
     title: "Crescent City Soul & Brass Milestone",
     mood: "Warm gas-lit ambiance, soulful brass rhythms, effortless Southern camaraderie, and rich Creole heritage.",
-    colorPalette: ["#1B3B2B", "#FAF082", "#FD9773", "#E7E0D1"],
+    colorPalette: ["#1B3B2B", "#FFE600", "#FD9773", "#E7E0D1"],
     vibeDescription: "From morning chicory coffee on a shaded balcony to a candlelit dinner in an 18th-century French Quarter courtyard, followed by world-class live jazz with a Sazerac in hand."
   },
   eventFormatAndVenue: {

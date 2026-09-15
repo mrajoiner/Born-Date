@@ -96,12 +96,12 @@ export const CustomizationScreen: React.FC<CustomizationScreenProps> = ({
       {/* Birthday Boy or Birthday Girl Quick Recap Bar */}
       <div className="bg-white rounded-2xl border-2 border-[#090909] p-4 flex flex-wrap items-center justify-between gap-3 shadow-2xs">
         <div className="flex flex-wrap items-center gap-4 text-xs font-semibold text-[#090909]">
-          <div className="flex items-center gap-1.5 bg-[#FAF082]/60 px-3 py-1 rounded-full border border-[#090909]">
+          <div className="flex items-center gap-1.5 bg-[#FFE600]/60 px-3 py-1 rounded-full border border-[#090909]">
             <IconCelebrant className="w-4 h-4 text-[#090909]" />
             <span>{honoreeLabel}: <strong className="font-bold">{profile.fullName}</strong></span>
           </div>
           <span className="text-[#E7E0D1]">•</span>
-          <div className="flex items-center gap-1.5 bg-[#FAF082] px-2.5 py-0.5 rounded-full border border-[#090909]">
+          <div className="flex items-center gap-1.5 bg-[#FFE600] px-2.5 py-0.5 rounded-full border border-[#090909]">
             <IconCalendarParty className="w-3.5 h-3.5 text-[#090909]" />
             <span>Born: {profile.dob}</span>
           </div>
@@ -162,7 +162,7 @@ export const CustomizationScreen: React.FC<CustomizationScreenProps> = ({
                   }
                   className={`text-left p-4 rounded-2xl border-2 transition-all ${
                     isSelected
-                      ? "border-[#090909] bg-[#FAF082] shadow-2xs"
+                      ? "border-[#090909] bg-[#FFE600] shadow-2xs"
                       : "border-[#E7E0D1] hover:border-[#090909] bg-[#FCF7E5]/30"
                   }`}
                 >
@@ -208,7 +208,7 @@ export const CustomizationScreen: React.FC<CustomizationScreenProps> = ({
                   }`}
                 >
                   <span>{item}</span>
-                  {isSelected && <IconSparkle className="w-3 h-3 text-[#FAF082]" />}
+                  {isSelected && <IconSparkle className="w-3 h-3 text-[#FFE600]" />}
                 </button>
               );
             })}
@@ -244,7 +244,7 @@ export const CustomizationScreen: React.FC<CustomizationScreenProps> = ({
                 <IconCelebrant className="w-4 h-4" />
                 <span>Guest Count (including {honoreeLabel.toLowerCase()})</span>
               </span>
-              <span className="text-xs font-bold bg-[#FAF082] px-2 py-0.5 rounded-md border border-[#090909]">
+              <span className="text-xs font-bold bg-[#FFE600] px-2 py-0.5 rounded-md border border-[#090909]">
                 {profile.guestCount || 8} People
               </span>
             </label>
@@ -280,7 +280,7 @@ export const CustomizationScreen: React.FC<CustomizationScreenProps> = ({
                   budgetTier: e.target.value as any,
                 })
               }
-              className="w-full text-sm font-medium bg-white text-[#090909] border-2 border-[#090909] rounded-xl px-3.5 py-3 outline-none focus:ring-2 focus:ring-[#FAF082]"
+              className="w-full text-sm font-medium bg-white text-[#090909] border-2 border-[#090909] rounded-xl px-3.5 py-3 outline-none focus:ring-2 focus:ring-[#FFE600]"
             >
               <option value="tier_under_100">Pocket-Friendly Bash (Up to $100 / person)</option>
               <option value="tier_100_to_300">The Sweet Spot ($100 - $300 / person)</option>
@@ -311,7 +311,7 @@ export const CustomizationScreen: React.FC<CustomizationScreenProps> = ({
                 atmosphere: e.target.value,
               })
             }
-            className="w-full text-sm bg-white text-[#090909] border-2 border-[#090909] rounded-2xl p-3.5 outline-none focus:ring-2 focus:ring-[#FAF082] placeholder:text-[#5C584F]/50"
+            className="w-full text-sm bg-white text-[#090909] border-2 border-[#090909] rounded-2xl p-3.5 outline-none focus:ring-2 focus:ring-[#FFE600] placeholder:text-[#5C584F]/50"
           />
         </div>
 
@@ -343,7 +343,7 @@ export const CustomizationScreen: React.FC<CustomizationScreenProps> = ({
               </>
             ) : (
               <>
-                <IconPartyPopper className="w-5 h-5 text-[#FAF082]" />
+                <IconPartyPopper className="w-5 h-5 text-[#FFE600]" />
                 <span>Generate Born Day Plan</span>
               </>
             )}

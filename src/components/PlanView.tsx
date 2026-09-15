@@ -39,6 +39,7 @@ import {
   Archive,
   PlusCircle,
   RefreshCw,
+  Calendar,
 } from "lucide-react";
 import { CelebrationDispatchModal } from "./CelebrationDispatchModal";
 
@@ -120,9 +121,9 @@ export const PlanView: React.FC<PlanViewProps> = ({
           </p>
         </div>
 
-        {/* Action Buttons: Download PDF, Archive, New Plan, Email, Text, Edit Customizations, Copy */}
+        {/* Action Buttons: Download PDF (Active), Start New Plan / Reset, Archive, Email (Soon), Text (Soon), Calendar (Soon), Edit, Copy */}
         <div className="flex flex-wrap items-center gap-2 self-stretch sm:self-auto">
-          {/* Main Download .PDF Button */}
+          {/* Main Download .PDF Button (Active & Free) */}
           <button
             id="header-download-pdf-btn"
             type="button"
@@ -130,13 +131,26 @@ export const PlanView: React.FC<PlanViewProps> = ({
               setDispatchInitialTab("pdf");
               setDispatchModalOpen(true);
             }}
-            className="flex-1 sm:flex-initial text-xs font-bold text-[#090909] bg-[#FAF082] hover:bg-yellow-300 px-3.5 py-2 rounded-full border-2 border-[#090909] transition-all flex items-center justify-center gap-1.5 shadow-xs"
+            className="flex-1 sm:flex-initial text-xs font-bold text-[#090909] bg-[#FFE600] hover:bg-[#FFF066] active:scale-95 px-3.5 py-2 rounded-full border-2 border-[#090909] transition-all flex items-center justify-center gap-1.5 shadow-xs"
+            title="Download full on-brand PDF celebration masterplan"
           >
             <Download className="w-3.5 h-3.5 text-[#090909]" />
             <span>Download .PDF</span>
             <span className="bg-[#090909] text-white text-[9px] px-1.5 py-0.5 rounded font-black">
               FREE
             </span>
+          </button>
+
+          {/* Start New Plan / Reset Button */}
+          <button
+            id="header-start-new-plan-btn"
+            type="button"
+            onClick={onStartOver}
+            className="text-xs font-bold text-[#090909] bg-white hover:bg-[#FFE600] px-3.5 py-2 rounded-full border border-[#090909] transition-all flex items-center justify-center gap-1.5 shadow-2xs active:scale-95"
+            title="Reset or start a brand new celebration plan at any time"
+          >
+            <RotateCcw className="w-3.5 h-3.5 text-[#090909]" />
+            <span>Start New Plan</span>
           </button>
 
           {/* Archive Plan Button */}
@@ -147,7 +161,7 @@ export const PlanView: React.FC<PlanViewProps> = ({
             className={`text-xs font-bold px-3.5 py-2 rounded-full border border-[#090909] transition-all flex items-center justify-center gap-1.5 shadow-2xs ${
               isArchived
                 ? "bg-[#1B3B2B] text-white hover:bg-[#234d38]"
-                : "bg-white text-[#090909] hover:bg-[#FAF082]/40"
+                : "bg-white text-[#090909] hover:bg-[#FFE600]/40"
             }`}
             title={isArchived ? "Plan saved in your archives vault" : "Archive this plan to vault"}
           >
@@ -155,46 +169,52 @@ export const PlanView: React.FC<PlanViewProps> = ({
             <span>{isArchived ? "Archived ✓" : "Archive Plan"}</span>
           </button>
 
-          {/* New Plan / Refresh Trigger Button */}
-          <button
-            id="header-new-plan-btn"
-            type="button"
-            onClick={onCreateNewPlan}
-            className="text-xs font-bold text-[#090909] bg-white hover:bg-[#FCF7E5] px-3.5 py-2 rounded-full border border-[#090909] transition-all flex items-center justify-center gap-1.5 shadow-2xs"
-            title="Create a new celebration plan or refresh"
-          >
-            <PlusCircle className="w-3.5 h-3.5 text-[#090909]" />
-            <span>New Plan</span>
-          </button>
-
-          {/* Email Plan Button */}
+          {/* Email Plan Button (Shown but Disabled) */}
           <button
             id="header-email-plan-btn"
             type="button"
-            onClick={() => {
-              setDispatchInitialTab("email");
-              setDispatchModalOpen(true);
-            }}
-            className="text-xs font-bold text-[#090909] bg-white hover:bg-[#FCF7E5] px-3 py-2 rounded-full border border-[#090909] transition-all flex items-center justify-center gap-1.5 shadow-2xs"
+            disabled={true}
+            aria-disabled="true"
+            title="Email dispatch option (rolling out soon)"
+            className="text-xs font-bold text-[#5C584F] bg-neutral-100/90 px-3 py-2 rounded-full border border-neutral-300 transition-all flex items-center justify-center gap-1.5 opacity-65 cursor-not-allowed select-none"
           >
-            <Mail className="w-3.5 h-3.5 text-[#090909]" />
+            <Mail className="w-3.5 h-3.5 text-neutral-400" />
             <span>Email</span>
-            <span className="text-[10px] text-[#5C584F] font-bold">($2)</span>
+            <span className="text-[9px] uppercase px-1.5 py-0.2 rounded bg-neutral-200 text-neutral-600 font-bold">
+              Soon
+            </span>
           </button>
 
-          {/* Text Plan Button */}
+          {/* Text / SMS Plan Button (Shown but Disabled) */}
           <button
             id="header-text-plan-btn"
             type="button"
-            onClick={() => {
-              setDispatchInitialTab("text");
-              setDispatchModalOpen(true);
-            }}
-            className="text-xs font-bold text-[#090909] bg-white hover:bg-[#FCF7E5] px-3 py-2 rounded-full border border-[#090909] transition-all flex items-center justify-center gap-1.5 shadow-2xs"
+            disabled={true}
+            aria-disabled="true"
+            title="SMS / Text alert option (rolling out soon)"
+            className="text-xs font-bold text-[#5C584F] bg-neutral-100/90 px-3 py-2 rounded-full border border-neutral-300 transition-all flex items-center justify-center gap-1.5 opacity-65 cursor-not-allowed select-none"
           >
-            <MessageSquare className="w-3.5 h-3.5 text-[#090909]" />
+            <MessageSquare className="w-3.5 h-3.5 text-neutral-400" />
             <span>Text</span>
-            <span className="text-[10px] text-[#5C584F] font-bold">($2)</span>
+            <span className="text-[9px] uppercase px-1.5 py-0.2 rounded bg-neutral-200 text-neutral-600 font-bold">
+              Soon
+            </span>
+          </button>
+
+          {/* Calendar Invite Option (Shown but Disabled) */}
+          <button
+            id="header-calendar-plan-btn"
+            type="button"
+            disabled={true}
+            aria-disabled="true"
+            title="Calendar sync option (rolling out soon)"
+            className="hidden lg:flex text-xs font-bold text-[#5C584F] bg-neutral-100/90 px-3 py-2 rounded-full border border-neutral-300 transition-all items-center justify-center gap-1.5 opacity-65 cursor-not-allowed select-none"
+          >
+            <Calendar className="w-3.5 h-3.5 text-neutral-400" />
+            <span>Calendar</span>
+            <span className="text-[9px] uppercase px-1.5 py-0.2 rounded bg-neutral-200 text-neutral-600 font-bold">
+              Soon
+            </span>
           </button>
 
           <button
@@ -217,7 +237,7 @@ export const PlanView: React.FC<PlanViewProps> = ({
           >
             {isCopied ? (
               <>
-                <Check className="w-3.5 h-3.5 text-[#FAF082]" />
+                <Check className="w-3.5 h-3.5 text-[#FFE600]" />
                 <span>Copied!</span>
               </>
             ) : (
@@ -234,20 +254,21 @@ export const PlanView: React.FC<PlanViewProps> = ({
       <div className="bg-[#090909] text-white rounded-3xl p-5 sm:p-6 border-2 border-[#090909] shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-5 relative overflow-hidden">
         <div className="space-y-1.5 z-10">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-black uppercase tracking-wider text-[#FAF082] bg-white/10 px-2.5 py-0.5 rounded-full border border-[#FAF082]/30">
+            <span className="text-xs font-black uppercase tracking-wider text-[#FFE600] bg-white/10 px-2.5 py-0.5 rounded-full border border-[#FFE600]/30">
               Celebration Dispatch Hub
             </span>
-            <span className="text-xs text-neutral-300 font-medium">Standard rate $2.00 each</span>
+            <span className="text-xs text-[#FFE600] font-bold">Download Active • Messaging Rolling Out</span>
           </div>
           <h3 className="font-serif-display text-2xl font-bold text-white">
             Ready to Share the Masterplan?
           </h3>
-          <p className="text-xs text-neutral-300 max-w-xl">
-            Download our on-brand, high-resolution PDF complete with timeline, verified reviews, and dietary directives—or beam the plan directly to guests via Email or Text ($2 each, free PDF download today).
+          <p className="text-xs text-neutral-300 max-w-xl leading-relaxed">
+            Download our on-brand, high-resolution PDF complete with timeline, verified reviews, and dietary directives right now for free. Automated Email, Text SMS alerts, and Calendar invite channels are displayed below and will be activated in the next release.
           </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-2.5 z-10 w-full md:w-auto">
+          {/* Download PDF Option (Active & Enabled) */}
           <button
             type="button"
             id="showcase-download-pdf-btn"
@@ -255,39 +276,61 @@ export const PlanView: React.FC<PlanViewProps> = ({
               setDispatchInitialTab("pdf");
               setDispatchModalOpen(true);
             }}
-            className="flex-1 md:flex-initial bg-[#FAF082] hover:bg-yellow-300 text-[#090909] font-bold text-xs px-4 py-3 rounded-2xl border-2 border-[#FAF082] transition-all flex items-center justify-center gap-2 shadow-xs"
+            className="flex-1 md:flex-initial bg-[#FFE600] hover:bg-yellow-300 active:scale-95 text-[#090909] font-bold text-xs px-4 py-3 rounded-2xl border-2 border-[#FFE600] transition-all flex items-center justify-center gap-2 shadow-xs"
           >
             <Download className="w-4 h-4 text-[#090909]" />
             <span>Download .PDF</span>
             <span className="bg-[#090909] text-white text-[9px] px-1.5 py-0.5 rounded font-black">
-              FREE DEMO
+              ACTIVE & FREE
             </span>
           </button>
 
+          {/* Email Option (Shown, Not Enabled) */}
           <button
             type="button"
             id="showcase-email-btn"
-            onClick={() => {
-              setDispatchInitialTab("email");
-              setDispatchModalOpen(true);
-            }}
-            className="flex-1 md:flex-initial bg-white/10 hover:bg-white/20 text-white font-bold text-xs px-3.5 py-3 rounded-2xl border border-white/20 transition-all flex items-center justify-center gap-2"
+            disabled={true}
+            aria-disabled="true"
+            title="Email dispatch option is rolling out soon"
+            className="flex-1 md:flex-initial bg-white/5 text-neutral-400 font-bold text-xs px-3.5 py-3 rounded-2xl border border-white/10 flex items-center justify-center gap-2 opacity-60 cursor-not-allowed select-none"
           >
-            <Mail className="w-4 h-4 text-[#FAF082]" />
-            <span>Email Plan ($2)</span>
+            <Mail className="w-4 h-4 text-neutral-400" />
+            <span>Email</span>
+            <span className="text-[9px] uppercase px-1.5 py-0.5 rounded bg-white/10 text-neutral-300 font-bold">
+              Coming Soon
+            </span>
           </button>
 
+          {/* Text Option (Shown, Not Enabled) */}
           <button
             type="button"
             id="showcase-text-btn"
-            onClick={() => {
-              setDispatchInitialTab("text");
-              setDispatchModalOpen(true);
-            }}
-            className="flex-1 md:flex-initial bg-white/10 hover:bg-white/20 text-white font-bold text-xs px-3.5 py-3 rounded-2xl border border-white/20 transition-all flex items-center justify-center gap-2"
+            disabled={true}
+            aria-disabled="true"
+            title="SMS / Text alert option is rolling out soon"
+            className="flex-1 md:flex-initial bg-white/5 text-neutral-400 font-bold text-xs px-3.5 py-3 rounded-2xl border border-white/10 flex items-center justify-center gap-2 opacity-60 cursor-not-allowed select-none"
           >
-            <MessageSquare className="w-4 h-4 text-[#FAF082]" />
-            <span>Text / SMS ($2)</span>
+            <MessageSquare className="w-4 h-4 text-neutral-400" />
+            <span>Text / SMS</span>
+            <span className="text-[9px] uppercase px-1.5 py-0.5 rounded bg-white/10 text-neutral-300 font-bold">
+              Coming Soon
+            </span>
+          </button>
+
+          {/* Calendar Option (Shown, Not Enabled) */}
+          <button
+            type="button"
+            id="showcase-calendar-btn"
+            disabled={true}
+            aria-disabled="true"
+            title="Calendar sync option is rolling out soon"
+            className="hidden sm:flex flex-1 md:flex-initial bg-white/5 text-neutral-400 font-bold text-xs px-3.5 py-3 rounded-2xl border border-white/10 items-center justify-center gap-2 opacity-60 cursor-not-allowed select-none"
+          >
+            <Calendar className="w-4 h-4 text-neutral-400" />
+            <span>Calendar</span>
+            <span className="text-[9px] uppercase px-1.5 py-0.5 rounded bg-white/10 text-neutral-300 font-bold">
+              Coming Soon
+            </span>
           </button>
         </div>
       </div>
@@ -340,7 +383,7 @@ export const PlanView: React.FC<PlanViewProps> = ({
           {/* SECTION 1: BIRTHDAY OVERVIEW */}
           <section id="section-birthday-overview" className="bg-white rounded-[28px] border border-[#E7E0D1] p-6 sm:p-8 shadow-sm">
             <div className="flex items-center gap-2.5 mb-3">
-              <div className="w-6 h-6 rounded-full bg-[#FAF082] flex items-center justify-center text-[#090909] text-xs font-bold">
+              <div className="w-6 h-6 rounded-full bg-[#FFE600] flex items-center justify-center text-[#090909] text-xs font-bold">
                 1
               </div>
               <h3 className="font-serif-display text-2xl font-bold text-[#090909]">
@@ -369,14 +412,14 @@ export const PlanView: React.FC<PlanViewProps> = ({
           {/* SECTION 2: THEME AND MOOD */}
           <section id="section-theme-and-mood" className="bg-white rounded-[28px] border border-[#E7E0D1] p-6 sm:p-8 shadow-sm">
             <div className="flex items-center gap-2.5 mb-3">
-              <div className="w-6 h-6 rounded-full bg-[#FAF082] flex items-center justify-center text-[#090909] text-xs font-bold">
+              <div className="w-6 h-6 rounded-full bg-[#FFE600] flex items-center justify-center text-[#090909] text-xs font-bold">
                 2
               </div>
               <h3 className="font-serif-display text-2xl font-bold text-[#090909]">
                 Theme & Mood
               </h3>
             </div>
-            <div className="bg-[#FAF082]/40 border border-[#E7E0D1] rounded-2xl p-5 mb-4">
+            <div className="bg-[#FFE600]/40 border border-[#E7E0D1] rounded-2xl p-5 mb-4">
               <span className="text-xs font-bold uppercase tracking-wider text-[#090909] block mb-1">
                 Signature Concept
               </span>
@@ -410,7 +453,7 @@ export const PlanView: React.FC<PlanViewProps> = ({
           {/* SECTION 3: EVENT FORMAT AND VENUE APPROACH */}
           <section id="section-event-format-and-venue" className="bg-white rounded-[28px] border border-[#E7E0D1] p-6 sm:p-8 shadow-sm">
             <div className="flex items-center gap-2.5 mb-3">
-              <div className="w-6 h-6 rounded-full bg-[#FAF082] flex items-center justify-center text-[#090909] text-xs font-bold">
+              <div className="w-6 h-6 rounded-full bg-[#FFE600] flex items-center justify-center text-[#090909] text-xs font-bold">
                 3
               </div>
               <h3 className="font-serif-display text-2xl font-bold text-[#090909]">
@@ -481,7 +524,7 @@ export const PlanView: React.FC<PlanViewProps> = ({
           {/* SECTION 4: DETAILED TIMELINE */}
           <section id="section-detailed-timeline" className="bg-white rounded-[28px] border border-[#E7E0D1] p-6 sm:p-8 shadow-sm">
             <div className="flex items-center gap-2.5 mb-3">
-              <div className="w-6 h-6 rounded-full bg-[#FAF082] flex items-center justify-center text-[#090909] text-xs font-bold">
+              <div className="w-6 h-6 rounded-full bg-[#FFE600] flex items-center justify-center text-[#090909] text-xs font-bold">
                 4
               </div>
               <h3 className="font-serif-display text-2xl font-bold text-[#090909]">
@@ -492,7 +535,7 @@ export const PlanView: React.FC<PlanViewProps> = ({
               A sequenced, buffer-friendly day-of celebration run sheet designed to prevent rushing.
             </p>
 
-            <div className="relative pl-6 border-l-2 border-[#FAF082] space-y-6">
+            <div className="relative pl-6 border-l-2 border-[#FFE600] space-y-6">
               {plan.timeline.map((event, idx) => (
                 <div key={idx} className="relative group">
                   {/* Timeline bullet dot */}
@@ -504,7 +547,7 @@ export const PlanView: React.FC<PlanViewProps> = ({
                   <div
                     className={`rounded-2xl p-4 border transition-all ${
                       event.isKeyMoment
-                        ? "bg-[#FAF082]/30 border-[#FAF082]"
+                        ? "bg-[#FFE600]/30 border-[#FFE600]"
                         : "bg-white border-[#E7E0D1]"
                     }`}
                   >
@@ -541,7 +584,7 @@ export const PlanView: React.FC<PlanViewProps> = ({
           {/* SECTION 5: FOOD AND CAKE */}
           <section id="section-food-and-cake" className="bg-white rounded-[28px] border border-[#E7E0D1] p-6 sm:p-8 shadow-sm">
             <div className="flex items-center gap-2.5 mb-3">
-              <div className="w-6 h-6 rounded-full bg-[#FAF082] flex items-center justify-center text-[#090909] text-xs font-bold">
+              <div className="w-6 h-6 rounded-full bg-[#FFE600] flex items-center justify-center text-[#090909] text-xs font-bold">
                 5
               </div>
               <h3 className="font-serif-display text-2xl font-bold text-[#090909]">
@@ -558,7 +601,7 @@ export const PlanView: React.FC<PlanViewProps> = ({
             </div>
 
             {/* Cake Box */}
-            <div className="border-2 border-[#FAF082] bg-white rounded-2xl p-5 mb-6 shadow-2xs">
+            <div className="border-2 border-[#FFE600] bg-white rounded-2xl p-5 mb-6 shadow-2xs">
               <div className="flex items-center gap-2 mb-2">
                 <IconSparkle className="w-4 h-4 text-[#090909]" />
                 <span className="text-xs font-bold uppercase tracking-wider text-[#090909]">
@@ -585,7 +628,7 @@ export const PlanView: React.FC<PlanViewProps> = ({
                   <Star className="w-3.5 h-3.5 fill-[#FD9773] text-[#FD9773]" />
                   <span>Curated Dining (Ranked Highest Rated First)</span>
                 </h4>
-                <span className="text-[11px] font-semibold text-[#1B3B2B] bg-[#FAF082]/80 px-2.5 py-0.5 rounded-full border border-[#FAF082]">
+                <span className="text-[11px] font-semibold text-[#1B3B2B] bg-[#FFE600]/80 px-2.5 py-0.5 rounded-full border border-[#FFE600]">
                   Top Online Reviews & Acclaim
                 </span>
               </div>
@@ -595,15 +638,15 @@ export const PlanView: React.FC<PlanViewProps> = ({
                     <div>
                       <div className="flex items-start justify-between gap-2 mb-1">
                         <h5 className="font-serif-display font-bold text-base text-[#090909]">{f.name}</h5>
-                        <span className="text-xs font-bold text-[#1B3B2B] bg-[#FAF082]/60 px-2 py-0.5 rounded-full">
+                        <span className="text-xs font-bold text-[#1B3B2B] bg-[#FFE600]/60 px-2 py-0.5 rounded-full">
                           {f.costEstimatePerPerson}
                         </span>
                       </div>
 
                       {/* Online Rating and Reviews Badge */}
                       <div className="flex flex-wrap items-center gap-2 mb-2">
-                        <span className="inline-flex items-center gap-1 text-xs font-bold bg-[#090909] text-[#FAF082] px-2 py-0.5 rounded-md">
-                          <Star className="w-3 h-3 fill-[#FAF082] text-[#FAF082]" />
+                        <span className="inline-flex items-center gap-1 text-xs font-bold bg-[#090909] text-[#FFE600] px-2 py-0.5 rounded-md">
+                          <Star className="w-3 h-3 fill-[#FFE600] text-[#FFE600]" />
                           <span>{f.rating?.toFixed(1) || "4.9"}</span>
                         </span>
                         {f.reviewCount && (
@@ -612,7 +655,7 @@ export const PlanView: React.FC<PlanViewProps> = ({
                           </span>
                         )}
                         {f.ratingSource && (
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-[#1B3B2B] bg-[#FAF082]/60 px-2 py-0.5 rounded-full">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-[#1B3B2B] bg-[#FFE600]/60 px-2 py-0.5 rounded-full">
                             {f.ratingSource}
                           </span>
                         )}
@@ -625,7 +668,7 @@ export const PlanView: React.FC<PlanViewProps> = ({
                       </p>
 
                       {f.reviewHighlight && (
-                        <div className="text-[11px] text-[#5C584F] bg-[#FAF082]/15 border border-[#FAF082] p-2 rounded-lg mb-2 italic">
+                        <div className="text-[11px] text-[#5C584F] bg-[#FFE600]/15 border border-[#FFE600] p-2 rounded-lg mb-2 italic">
                           <span className="font-semibold not-italic text-[#090909]">Reviewer Highlight: </span>
                           "{f.reviewHighlight}"
                         </div>
@@ -675,7 +718,7 @@ export const PlanView: React.FC<PlanViewProps> = ({
           {/* SECTION 6: ACTIVITIES AND ENTERTAINMENT */}
           <section id="section-activities-and-entertainment" className="bg-white rounded-[28px] border border-[#E7E0D1] p-6 sm:p-8 shadow-sm">
             <div className="flex items-center gap-2.5 mb-3">
-              <div className="w-6 h-6 rounded-full bg-[#FAF082] flex items-center justify-center text-[#090909] text-xs font-bold">
+              <div className="w-6 h-6 rounded-full bg-[#FFE600] flex items-center justify-center text-[#090909] text-xs font-bold">
                 6
               </div>
               <h3 className="font-serif-display text-2xl font-bold text-[#090909]">
@@ -698,8 +741,8 @@ export const PlanView: React.FC<PlanViewProps> = ({
                     {/* Rating and Reviews Badge */}
                     {act.rating && (
                       <div className="flex items-center gap-2 mb-2">
-                        <span className="inline-flex items-center gap-1 text-[11px] font-bold bg-[#090909] text-[#FAF082] px-2 py-0.5 rounded-md">
-                          <Star className="w-3 h-3 fill-[#FAF082] text-[#FAF082]" />
+                        <span className="inline-flex items-center gap-1 text-[11px] font-bold bg-[#090909] text-[#FFE600] px-2 py-0.5 rounded-md">
+                          <Star className="w-3 h-3 fill-[#FFE600] text-[#FFE600]" />
                           <span>{act.rating.toFixed(1)}</span>
                         </span>
                         {act.reviewCount && (
@@ -762,7 +805,7 @@ export const PlanView: React.FC<PlanViewProps> = ({
           {/* SECTION 7: PERSONALIZED TOUCHES */}
           <section id="section-personalized-touches" className="bg-white rounded-[28px] border border-[#E7E0D1] p-6 sm:p-8 shadow-sm">
             <div className="flex items-center gap-2.5 mb-3">
-              <div className="w-6 h-6 rounded-full bg-[#FAF082] flex items-center justify-center text-[#090909] text-xs font-bold">
+              <div className="w-6 h-6 rounded-full bg-[#FFE600] flex items-center justify-center text-[#090909] text-xs font-bold">
                 7
               </div>
               <h3 className="font-serif-display text-2xl font-bold text-[#090909]">
@@ -779,7 +822,7 @@ export const PlanView: React.FC<PlanViewProps> = ({
                   key={idx}
                   className="bg-[#FCF7E5] border border-[#E7E0D1] rounded-2xl p-4 flex items-start gap-3"
                 >
-                  <div className="w-6 h-6 rounded-full bg-[#FAF082] text-[#090909] flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <div className="w-6 h-6 rounded-full bg-[#FFE600] text-[#090909] flex items-center justify-center flex-shrink-0 mt-0.5">
                     <IconSparkle className="w-3.5 h-3.5" />
                   </div>
                   <p className="text-xs sm:text-sm text-[#090909] leading-relaxed font-medium">
@@ -793,7 +836,7 @@ export const PlanView: React.FC<PlanViewProps> = ({
           {/* SECTION 8: THREE-TIER BUDGET ESTIMATE IN USD */}
           <section id="section-three-tier-budget" className="bg-white rounded-[28px] border border-[#E7E0D1] p-6 sm:p-8 shadow-sm">
             <div className="flex items-center gap-2.5 mb-3">
-              <div className="w-6 h-6 rounded-full bg-[#FAF082] flex items-center justify-center text-[#090909] text-xs font-bold">
+              <div className="w-6 h-6 rounded-full bg-[#FFE600] flex items-center justify-center text-[#090909] text-xs font-bold">
                 8
               </div>
               <h3 className="font-serif-display text-2xl font-bold text-[#090909]">
@@ -837,12 +880,12 @@ export const PlanView: React.FC<PlanViewProps> = ({
               </div>
 
               {/* Tier 2: Moderate (Recommended) */}
-              <div className="border-2 border-[#FAF082] rounded-2xl p-5 bg-[#FAF082]/20 flex flex-col justify-between shadow-xs relative">
-                <div className="absolute -top-3 right-4 bg-[#090909] text-[#FAF082] text-[10px] font-bold px-3 py-0.5 rounded-full uppercase tracking-wider">
+              <div className="border-2 border-[#FFE600] rounded-2xl p-5 bg-[#FFE600]/20 flex flex-col justify-between shadow-xs relative">
+                <div className="absolute -top-3 right-4 bg-[#090909] text-[#FFE600] text-[10px] font-bold px-3 py-0.5 rounded-full uppercase tracking-wider">
                   Recommended
                 </div>
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#090909] bg-[#FAF082] px-2.5 py-1 rounded-full border border-[#E7E0D1]">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#090909] bg-[#FFE600] px-2.5 py-1 rounded-full border border-[#E7E0D1]">
                     Tier 2: $100 - $300 / person
                   </span>
                   <h4 className="font-serif-display font-bold text-lg text-[#090909] mt-3">
@@ -906,7 +949,7 @@ export const PlanView: React.FC<PlanViewProps> = ({
           {/* SECTION 9: SHOPPING AND PREPARATION CHECKLIST */}
           <section id="section-preparation-checklist" className="bg-white rounded-[28px] border border-[#E7E0D1] p-6 sm:p-8 shadow-sm">
             <div className="flex items-center gap-2.5 mb-3">
-              <div className="w-6 h-6 rounded-full bg-[#FAF082] flex items-center justify-center text-[#090909] text-xs font-bold">
+              <div className="w-6 h-6 rounded-full bg-[#FFE600] flex items-center justify-center text-[#090909] text-xs font-bold">
                 9
               </div>
               <h3 className="font-serif-display text-2xl font-bold text-[#090909]">
@@ -1074,14 +1117,14 @@ export const PlanView: React.FC<PlanViewProps> = ({
           {/* SECTION 10: BACKUP PLAN */}
           <section id="section-backup-plan" className="bg-white rounded-[28px] border border-[#E7E0D1] p-6 sm:p-8 shadow-sm">
             <div className="flex items-center gap-2.5 mb-3">
-              <div className="w-6 h-6 rounded-full bg-[#FAF082] flex items-center justify-center text-[#090909] text-xs font-bold">
+              <div className="w-6 h-6 rounded-full bg-[#FFE600] flex items-center justify-center text-[#090909] text-xs font-bold">
                 10
               </div>
               <h3 className="font-serif-display text-2xl font-bold text-[#090909]">
                 Backup Plan & Contingencies
               </h3>
             </div>
-            <div className="bg-[#FAF082]/30 rounded-2xl p-4 border border-[#E7E0D1] mb-4">
+            <div className="bg-[#FFE600]/30 rounded-2xl p-4 border border-[#E7E0D1] mb-4">
               <div className="flex items-center gap-2 mb-1">
                 <IconUmbrella className="w-4 h-4 text-[#090909]" />
                 <span className="text-xs font-bold uppercase tracking-wider text-[#090909]">
@@ -1125,7 +1168,7 @@ export const PlanView: React.FC<PlanViewProps> = ({
           {/* SECTION 11: THREE NEXT DECISIONS */}
           <section id="section-next-decisions" className="bg-white rounded-[28px] border border-[#E7E0D1] p-6 sm:p-8 shadow-sm">
             <div className="flex items-center gap-2.5 mb-3">
-              <div className="w-6 h-6 rounded-full bg-[#FAF082] flex items-center justify-center text-[#090909] text-xs font-bold">
+              <div className="w-6 h-6 rounded-full bg-[#FFE600] flex items-center justify-center text-[#090909] text-xs font-bold">
                 11
               </div>
               <h3 className="font-serif-display text-2xl font-bold text-[#090909]">
@@ -1143,7 +1186,7 @@ export const PlanView: React.FC<PlanViewProps> = ({
                   className="bg-[#FCF7E5] border border-[#E7E0D1] rounded-2xl p-4 flex flex-col justify-between"
                 >
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xs font-bold bg-[#090909] text-[#FAF082] w-5 h-5 rounded-full flex items-center justify-center">
+                    <span className="text-xs font-bold bg-[#090909] text-[#FFE600] w-5 h-5 rounded-full flex items-center justify-center">
                       {idx + 1}
                     </span>
                     <span className="text-xs font-bold uppercase tracking-wider text-[#090909]">
@@ -1190,7 +1233,7 @@ export const PlanView: React.FC<PlanViewProps> = ({
                   Checked against verified {profile.location} restaurant data and sorted highest-rated first.
                 </p>
               </div>
-              <span className="text-xs font-bold text-[#1B3B2B] bg-[#FAF082] px-3 py-1 rounded-full border border-[#FAF082]">
+              <span className="text-xs font-bold text-[#1B3B2B] bg-[#FFE600] px-3 py-1 rounded-full border border-[#FFE600]">
                 Ranked by Online Acclaim
               </span>
             </div>
@@ -1206,15 +1249,15 @@ export const PlanView: React.FC<PlanViewProps> = ({
                       <h4 className="font-serif-display font-bold text-lg text-[#090909]">
                         {food.name}
                       </h4>
-                      <span className="text-xs font-bold text-[#1B3B2B] bg-[#FAF082] px-2.5 py-1 rounded-full">
+                      <span className="text-xs font-bold text-[#1B3B2B] bg-[#FFE600] px-2.5 py-1 rounded-full">
                         {food.costEstimatePerPerson}
                       </span>
                     </div>
 
                     {/* Online Rating & Review Summary */}
                     <div className="flex flex-wrap items-center gap-2 mb-2">
-                      <span className="inline-flex items-center gap-1 text-xs font-bold bg-[#090909] text-[#FAF082] px-2.5 py-0.5 rounded-md">
-                        <Star className="w-3 h-3 fill-[#FAF082] text-[#FAF082]" />
+                      <span className="inline-flex items-center gap-1 text-xs font-bold bg-[#090909] text-[#FFE600] px-2.5 py-0.5 rounded-md">
+                        <Star className="w-3 h-3 fill-[#FFE600] text-[#FFE600]" />
                         <span>{food.rating?.toFixed(1) || "4.9"}</span>
                       </span>
                       {food.reviewCount && (
@@ -1223,7 +1266,7 @@ export const PlanView: React.FC<PlanViewProps> = ({
                         </span>
                       )}
                       {food.ratingSource && (
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-[#1B3B2B] bg-[#FAF082]/60 px-2 py-0.5 rounded-full">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-[#1B3B2B] bg-[#FFE600]/60 px-2 py-0.5 rounded-full">
                           {food.ratingSource}
                         </span>
                       )}
@@ -1242,7 +1285,7 @@ export const PlanView: React.FC<PlanViewProps> = ({
                     </div>
 
                     {food.reviewHighlight && (
-                      <div className="text-xs text-[#5C584F] bg-[#FAF082]/15 border border-[#FAF082] p-2.5 rounded-xl mb-3 italic">
+                      <div className="text-xs text-[#5C584F] bg-[#FFE600]/15 border border-[#FFE600] p-2.5 rounded-xl mb-3 italic">
                         <span className="font-semibold not-italic text-[#090909]">Review Highlight: </span>
                         "{food.reviewHighlight}"
                       </div>
@@ -1272,13 +1315,13 @@ export const PlanView: React.FC<PlanViewProps> = ({
                       }
                       className={`text-xs font-semibold px-3 py-1.5 rounded-full border transition-all flex items-center gap-1.5 ${
                         isItemSaved(`food-tab-${i}`)
-                          ? "bg-[#090909] text-[#FAF082] border-[#090909]"
+                          ? "bg-[#090909] text-[#FFE600] border-[#090909]"
                           : "bg-white text-[#090909] border-[#E7E0D1] hover:bg-[#FCF7E5]"
                       }`}
                     >
                       {isItemSaved(`food-tab-${i}`) ? (
                         <>
-                          <BookmarkCheck className="w-3.5 h-3.5 text-[#FAF082]" />
+                          <BookmarkCheck className="w-3.5 h-3.5 text-[#FFE600]" />
                           <span>Added to Plan</span>
                         </>
                       ) : (
@@ -1294,7 +1337,7 @@ export const PlanView: React.FC<PlanViewProps> = ({
             </div>
 
             {/* Custom Cake Focus */}
-            <div className="mt-8 bg-[#FAF082]/30 border border-[#E7E0D1] rounded-2xl p-6">
+            <div className="mt-8 bg-[#FFE600]/30 border border-[#E7E0D1] rounded-2xl p-6">
               <span className="text-xs font-bold uppercase tracking-wider text-[#090909] block mb-1">
                 Custom Birthday Cake Concept
               </span>
@@ -1341,7 +1384,7 @@ export const PlanView: React.FC<PlanViewProps> = ({
                     </div>
 
                     <div className="flex flex-wrap items-center gap-2 text-xs text-[#5C584F] mb-3">
-                      <span className="bg-[#FAF082]/50 text-[#090909] px-2.5 py-0.5 rounded-full font-semibold">
+                      <span className="bg-[#FFE600]/50 text-[#090909] px-2.5 py-0.5 rounded-full font-semibold">
                         {activity.category}
                       </span>
                       <span>•</span>
@@ -1379,13 +1422,13 @@ export const PlanView: React.FC<PlanViewProps> = ({
                       }
                       className={`text-xs font-semibold px-3 py-1.5 rounded-full border transition-all flex items-center gap-1.5 ${
                         isItemSaved(`act-tab-${i}`)
-                          ? "bg-[#090909] text-[#FAF082] border-[#090909]"
+                          ? "bg-[#090909] text-[#FFE600] border-[#090909]"
                           : "bg-white text-[#090909] border-[#E7E0D1] hover:bg-[#FCF7E5]"
                       }`}
                     >
                       {isItemSaved(`act-tab-${i}`) ? (
                         <>
-                          <BookmarkCheck className="w-3.5 h-3.5 text-[#FAF082]" />
+                          <BookmarkCheck className="w-3.5 h-3.5 text-[#FFE600]" />
                           <span>Added to Plan</span>
                         </>
                       ) : (
@@ -1408,8 +1451,8 @@ export const PlanView: React.FC<PlanViewProps> = ({
         <div className="bg-[#090909] text-white rounded-2xl p-4 sm:p-5 shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <BookmarkCheck className="w-4 h-4 text-[#FAF082]" />
-              <span className="text-xs font-bold uppercase tracking-wider text-[#FAF082]">
+              <BookmarkCheck className="w-4 h-4 text-[#FFE600]" />
+              <span className="text-xs font-bold uppercase tracking-wider text-[#FFE600]">
                 Your Saved Birthday Highlights ({savedSelections.length})
               </span>
             </div>
@@ -1419,7 +1462,7 @@ export const PlanView: React.FC<PlanViewProps> = ({
           </div>
           <button
             onClick={onCopyPlan}
-            className="text-xs font-semibold bg-[#FAF082] text-[#090909] hover:bg-white px-4 py-2 rounded-full transition-all flex items-center gap-1.5 self-end sm:self-auto"
+            className="text-xs font-semibold bg-[#FFE600] text-[#090909] hover:bg-white px-4 py-2 rounded-full transition-all flex items-center gap-1.5 self-end sm:self-auto"
           >
             <Copy className="w-3.5 h-3.5" />
             <span>Copy Full Plan & Highlights</span>

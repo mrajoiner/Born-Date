@@ -128,7 +128,7 @@ export const LandingScreen: React.FC<LandingScreenProps> = ({
               onClick={() => onChangeProfile({ ...profile, honoreeRole: "either" })}
               className={`px-3.5 py-1.5 rounded-full border-2 text-xs font-bold transition-all flex items-center gap-1.5 ${
                 !profile.honoreeRole || profile.honoreeRole === "either"
-                  ? "bg-[#FAF082] text-[#090909] border-[#090909] shadow-xs"
+                  ? "bg-[#FFE600] text-[#090909] border-[#090909] shadow-xs"
                   : "bg-white text-[#5C584F] border-[#E7E0D1] hover:border-[#090909]"
               }`}
             >
@@ -167,7 +167,7 @@ export const LandingScreen: React.FC<LandingScreenProps> = ({
                   className={`w-full bg-white text-[#090909] text-base px-4 py-3.5 rounded-2xl border-2 ${
                     touched.fullName && errors.fullName
                       ? "border-red-600 focus:ring-2 focus:ring-red-200"
-                      : "border-[#090909] focus:bg-[#FAF082]/10 focus:ring-2 focus:ring-[#090909]"
+                      : "border-[#090909] focus:bg-[#FFE600]/10 focus:ring-2 focus:ring-[#090909]"
                   } outline-none transition-all placeholder:text-[#5C584F]/50`}
                 />
               </div>
@@ -228,7 +228,7 @@ export const LandingScreen: React.FC<LandingScreenProps> = ({
                   className={`w-full bg-white text-[#090909] text-base px-4 py-3.5 rounded-2xl border-2 ${
                     touched.location && errors.location
                       ? "border-red-600 focus:ring-2 focus:ring-red-200"
-                      : "border-[#090909] focus:bg-[#FAF082]/10 focus:ring-2 focus:ring-[#090909]"
+                      : "border-[#090909] focus:bg-[#FFE600]/10 focus:ring-2 focus:ring-[#090909]"
                   } outline-none transition-all placeholder:text-[#5C584F]/50`}
                 />
               </div>
@@ -273,7 +273,7 @@ export const LandingScreen: React.FC<LandingScreenProps> = ({
               className="w-full bg-[#090909] text-white hover:bg-neutral-800 active:scale-[0.99] font-bold text-base py-4 px-6 rounded-2xl border-2 border-[#090909] transition-all shadow-md flex items-center justify-center gap-3"
             >
               <span>Continue to Customizations</span>
-              <IconCompass className="w-5 h-5 text-[#FAF082]" />
+              <IconCompass className="w-5 h-5 text-[#FFE600]" />
             </button>
           </div>
         </form>

@@ -156,7 +156,7 @@ export const DietarySelector: React.FC<DietarySelectorProps> = ({
                   isSelected
                     ? isAllergy
                       ? "bg-[#090909] text-white border-[#090909] shadow-sm"
-                      : "bg-[#FAF082] text-[#090909] border-[#090909] shadow-sm"
+                      : "bg-[#FFE600] text-[#090909] border-[#090909] shadow-sm"
                     : "bg-white text-[#5C584F] border-[#E7E0D1] hover:border-[#090909] hover:text-[#090909]"
                 }`}
               >
@@ -194,7 +194,7 @@ export const DietarySelector: React.FC<DietarySelectorProps> = ({
             value={notes}
             onChange={(e) => handleNotesChange(e.target.value)}
             placeholder={`e.g. Loves fiery spicy jerk seasoning, allergic to strawberries, no raw red onions, must have a gluten-free cake slice for the ${birthdayPersonLabel}.`}
-            className="w-full bg-white text-[#090909] text-sm p-3.5 rounded-2xl border-2 border-[#090909] focus:bg-[#FAF082]/10 focus:ring-2 focus:ring-[#090909] outline-none transition-all placeholder:text-[#5C584F]/50 resize-none font-medium"
+            className="w-full bg-white text-[#090909] text-sm p-3.5 rounded-2xl border-2 border-[#090909] focus:bg-[#FFE600]/10 focus:ring-2 focus:ring-[#090909] outline-none transition-all placeholder:text-[#5C584F]/50 resize-none font-medium"
           />
           {notes.trim().length > 0 && (
             <button
@@ -216,7 +216,7 @@ export const DietarySelector: React.FC<DietarySelectorProps> = ({
               key={s}
               type="button"
               onClick={() => handleAddQuickNote(s)}
-              className="px-2 py-0.5 rounded-lg bg-[#FCF7E5] hover:bg-[#FAF082] text-[#090909] border border-[#090909]/40 font-medium transition-colors"
+              className="px-2 py-0.5 rounded-lg bg-[#FCF7E5] hover:bg-[#FFE600] text-[#090909] border border-[#090909]/40 font-medium transition-colors"
             >
               + {s}
             </button>
@@ -232,7 +232,7 @@ export const DietarySelector: React.FC<DietarySelectorProps> = ({
               <Sparkles className="w-4 h-4 text-[#090909]" />
               <span>Interpreted Dining Profile</span>
             </div>
-            <span className="text-[11px] font-semibold text-[#1B3B2B] bg-[#FAF082] px-2 py-0.5 rounded-md border border-[#090909]">
+            <span className="text-[11px] font-semibold text-[#1B3B2B] bg-[#FFE600] px-2 py-0.5 rounded-md border border-[#090909]">
               Checked against local restaurant data
             </span>
           </div>

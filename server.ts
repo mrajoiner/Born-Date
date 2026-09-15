@@ -509,7 +509,7 @@ Return strictly valid JSON. Do not wrap with prose before or after.`;
           title: `${profile.location} Heritage & Warm Festivity`,
           mood: "Lively yet relaxed, storied, soulful, and warmly celebratory",
           vibeDescription: `A tribute to ${profile.fullName} with warm hospitality, intimate storytelling, memorable dining, and relaxed neighborhood wandering.`,
-          colorPalette: ["#1B3B2B", "#FD9773", "#FAF082", "#2B2D42"]
+          colorPalette: ["#1B3B2B", "#FD9773", "#FFE600", "#2B2D42"]
         },
         eventFormatAndVenue: {
           format: "Afternoon exploration followed by courtyard dining and live music nightcap",

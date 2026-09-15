@@ -35,7 +35,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           onClick={onNavigateHome}
           id="nav-brand-logo"
         >
-          <div className="w-8 h-8 rounded-full bg-[#090909] flex items-center justify-center text-[#FAF082] shadow-2xs">
+          <div className="w-8 h-8 rounded-full bg-[#090909] flex items-center justify-center text-[#FFE600] shadow-2xs">
             <IconBirthdayCake className="w-5 h-5 text-white" />
           </div>
           <div>
@@ -53,7 +53,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <span
             className={`flex items-center gap-1.5 px-3 py-1 rounded-full border transition-all ${
               currentStep === "landing"
-                ? "bg-[#FAF082] text-[#090909] border-[#090909]"
+                ? "bg-[#FFE600] text-[#090909] border-[#090909]"
                 : "border-transparent"
             }`}
           >
@@ -63,7 +63,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <span
             className={`flex items-center gap-1.5 px-3 py-1 rounded-full border transition-all ${
               currentStep === "customize"
-                ? "bg-[#FAF082] text-[#090909] border-[#090909]"
+                ? "bg-[#FFE600] text-[#090909] border-[#090909]"
                 : "border-transparent"
             }`}
           >
@@ -73,7 +73,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <span
             className={`flex items-center gap-1.5 px-3 py-1 rounded-full border transition-all ${
               currentStep === "plan"
-                ? "bg-[#FAF082] text-[#090909] border-[#090909]"
+                ? "bg-[#FFE600] text-[#090909] border-[#090909]"
                 : "border-transparent"
             }`}
           >
@@ -82,45 +82,47 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {/* Right CTAs */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           {/* Archives Vault Button */}
           <button
             id="nav-archives-btn"
             type="button"
             onClick={onOpenArchives}
-            className="text-xs font-bold text-[#090909] px-3 py-1.5 rounded-full border border-[#090909] hover:bg-[#FAF082]/50 flex items-center gap-1.5 transition-all shadow-2xs"
+            className="text-xs font-bold text-[#090909] px-2.5 sm:px-3 py-1.5 rounded-full border border-[#090909] hover:bg-[#FFE600]/50 flex items-center gap-1.5 transition-all shadow-2xs shrink-0"
             title="Open plan archives vault"
           >
-            <Archive className="w-3.5 h-3.5 text-[#090909]" />
-            <span className="hidden sm:inline">Archives</span>
+            <Archive className="w-3.5 h-3.5 text-[#090909] shrink-0" />
+            <span className="hidden md:inline">Archives</span>
             {archivedCount > 0 && (
-              <span className="bg-[#090909] text-[#FAF082] text-[10px] font-bold px-1.5 py-0.2 rounded-full">
+              <span className="bg-[#090909] text-[#FFE600] text-[10px] font-bold px-1.5 py-0.2 rounded-full">
                 {archivedCount}
               </span>
             )}
           </button>
 
-          {hasPlan ? (
-            <button
-              id="nav-new-plan-btn"
-              type="button"
-              onClick={onCreateNewPlan}
-              className="text-xs font-bold text-[#090909] bg-white hover:bg-[#FCF7E5] px-3 py-1.5 rounded-full border border-[#090909] flex items-center gap-1.5 transition-all shadow-2xs"
-            >
-              <PlusCircle className="w-3.5 h-3.5 text-[#090909]" />
-              <span className="hidden sm:inline">New Plan</span>
-            </button>
-          ) : null}
+          {/* Persistent Reset / Start New Plan Button at ANY stage */}
+          <button
+            id="nav-start-new-plan-btn"
+            type="button"
+            onClick={onStartOver}
+            className="text-xs font-bold text-[#090909] bg-white hover:bg-[#FFE600] active:scale-95 px-2.5 sm:px-3 py-1.5 rounded-full border border-[#090909] flex items-center gap-1.5 transition-all shadow-2xs shrink-0"
+            title="Reset or start a brand new celebration plan at any time"
+          >
+            <RotateCcw className="w-3.5 h-3.5 text-[#090909] shrink-0" />
+            <span className="hidden sm:inline">Start New Plan</span>
+            <span className="sm:hidden">Reset</span>
+          </button>
 
           {currentStep === "plan" ? (
             <button
               id="nav-download-pdf-btn"
               type="button"
               onClick={onDownloadPdf}
-              className="bg-[#FAF082] hover:bg-yellow-300 text-[#090909] border-2 border-[#090909] text-xs font-bold px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-2xs transition-all active:scale-95"
+              className="bg-[#FFE600] hover:bg-[#FFF066] text-[#090909] border-2 border-[#090909] text-xs font-bold px-3 sm:px-3.5 py-1.5 rounded-full flex items-center gap-1.5 shadow-2xs transition-all active:scale-95 shrink-0"
             >
-              <Download className="w-3.5 h-3.5 text-[#090909]" />
-              <span className="hidden sm:inline">Download .PDF</span>
+              <Download className="w-3.5 h-3.5 text-[#090909] shrink-0" />
+              <span className="hidden xs:inline sm:inline">Download .PDF</span>
+              <span className="xs:hidden">PDF</span>
               <span className="bg-[#090909] text-white text-[9px] px-1 py-0.2 rounded font-black">
                 FREE
               </span>
@@ -128,10 +130,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           ) : (
             <button
               onClick={onNavigateHome}
-              className="bg-[#090909] text-white text-xs sm:text-sm font-bold px-4 py-2 rounded-full hover:bg-neutral-800 active:scale-95 transition-all shadow-2xs flex items-center gap-1.5"
+              className="bg-[#090909] text-white text-xs sm:text-sm font-bold px-3 sm:px-4 py-1.5 sm:py-2 rounded-full hover:bg-neutral-800 active:scale-95 transition-all shadow-2xs flex items-center gap-1.5 shrink-0"
             >
-              <IconCompass className="w-3.5 h-3.5 text-[#FAF082]" />
-              <span>{currentStep === "customize" ? "Customizing" : "Plan Birthday"}</span>
+              <IconCompass className="w-3.5 h-3.5 text-[#FFE600] shrink-0" />
+              <span className="hidden xs:inline">{currentStep === "customize" ? "Customizing" : "Plan Birthday"}</span>
+              <span className="xs:hidden">{currentStep === "customize" ? "Step 2" : "Start"}</span>
             </button>
           )}
         </div>
