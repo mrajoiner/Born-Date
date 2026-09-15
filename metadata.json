@@ -1,0 +1,6 @@
+{
+  "name": "Born Day",
+  "description": "Your personal AI birthday celebration sherpa that plans custom timelines, venues, dining, budgets, and live guidance.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
