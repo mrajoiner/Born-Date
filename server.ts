@@ -11,6 +11,27 @@ const PORT = 3000;
 
 app.use(express.json({ limit: "5mb" }));
 
+// Enable CORS so requests from GitHub Pages or external hosts work smoothly
+app.use((_req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, Origin, X-Requested-With, Accept");
+  if (_req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
+  next();
+});
+
+// Normalize /Born-Date prefix to support both root and GitHub Pages path structures
+app.use((req, _res, next) => {
+  if (req.url.startsWith("/Born-Date/")) {
+    req.url = req.url.replace(/^\/Born-Date/, "") || "/";
+  } else if (req.url === "/Born-Date") {
+    req.url = "/";
+  }
+  next();
+});
+
 // Lazy initialization of GoogleGenAI
 let aiClient: GoogleGenAI | null = null;
 function getAI(): GoogleGenAI {
@@ -224,6 +245,10 @@ function ensureReviewRatingsAndSort(plan: any) {
 }
 
 // Generate Birthday Plan endpoint
+app.get("/api/plan/generate", (_req, res) => {
+  res.json({ status: "ready", message: "Born Day plan generation endpoint active." });
+});
+
 app.post("/api/plan/generate", async (req, res) => {
   try {
     const { profile } = req.body;
@@ -726,6 +751,10 @@ Return strictly valid JSON. Do not wrap with prose before or after.`;
 });
 
 // Chat Refine endpoint
+app.get("/api/plan/refine", (_req, res) => {
+  res.json({ status: "ready", message: "Born Day plan refinement endpoint active." });
+});
+
 app.post("/api/plan/refine", async (req, res) => {
   try {
     const { profile, currentPlan, chatHistory, userMessage } = req.body;

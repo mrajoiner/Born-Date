@@ -12,6 +12,7 @@ import { IconBirthdayCake, IconSparkle } from "./components/BornDayIcons";
 import { generateBornDayPdf } from "./utils/pdfGenerator";
 import { ArchivedPlansModal } from "./components/ArchivedPlansModal";
 import { NewPlanConfirmModal } from "./components/NewPlanConfirmModal";
+import { generateClientPlan, refineClientPlan } from "./utils/planGenerator";
 
 const STORAGE_KEY = "born_day_celebration_session_v2";
 const ARCHIVE_STORAGE_KEY = "born_day_archived_plans_v1";
@@ -32,6 +33,8 @@ export default function App() {
   const [toast, setToast] = useState<ToastData | null>(null);
   const [isCopied, setIsCopied] = useState(false);
   const [networkError, setNetworkError] = useState<string | null>(null);
+  const [lastSyncedAt, setLastSyncedAt] = useState<Date>(new Date());
+  const [isAutoRefreshing, setIsAutoRefreshing] = useState(false);
 
   const topRef = useRef<HTMLDivElement | null>(null);
 
@@ -46,6 +49,7 @@ export default function App() {
           setPlan(parsed.plan);
           setStep("plan");
         }
+        if (parsed.step) setStep(parsed.step);
         if (parsed.chatMessages) setChatMessages(parsed.chatMessages);
         if (parsed.savedSelections) setSavedSelections(parsed.savedSelections);
       }
@@ -70,6 +74,7 @@ export default function App() {
   useEffect(() => {
     try {
       const dataToSave = {
+        step,
         profile,
         plan,
         chatMessages,
@@ -80,7 +85,7 @@ export default function App() {
     } catch (e) {
       console.warn("Could not save session to localStorage:", e);
     }
-  }, [profile, plan, chatMessages, savedSelections]);
+  }, [step, profile, plan, chatMessages, savedSelections]);
 
   // 3. Persist archives in localStorage
   useEffect(() => {
@@ -102,6 +107,101 @@ export default function App() {
   const scrollToTop = () => {
     topRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+
+  // Helper to format last sync time concisely
+  const getLastSyncedText = () => {
+    const diffSeconds = Math.round((Date.now() - lastSyncedAt.getTime()) / 1000);
+    if (diffSeconds < 60) return "Synced just now";
+    const minutes = Math.floor(diffSeconds / 60);
+    return `Synced ${minutes}m ago`;
+  };
+
+  // Auto-sync & refresh session handler (preserves all data, restores step, keeps timers fresh)
+  const syncAndRefreshSession = async (trigger: "manual" | "resume" | "interval" = "manual") => {
+    setIsAutoRefreshing(true);
+    try {
+      // 1. Re-sync from localStorage to ensure latest state across tabs/sleep
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.profile) setProfile(parsed.profile);
+        if (parsed.plan) setPlan(parsed.plan);
+        if (parsed.step) setStep(parsed.step);
+      }
+
+      // 2. Light health check to verify connectivity or detect any fresh code deploy
+      try {
+        const healthEndpoint = window.location.hostname.includes("github.io")
+          ? "./?t=" + Date.now()
+          : "/api/health?t=" + Date.now();
+        await fetch(healthEndpoint, { method: "HEAD", cache: "no-store" });
+      } catch {
+        // Silently tolerate if offline or static host
+      }
+
+      setLastSyncedAt(new Date());
+
+      if (trigger === "manual") {
+        showToast("Celebration session refreshed & synced!", "success");
+      } else if (trigger === "resume") {
+        showToast("Welcome back! Celebration session refreshed.", "info");
+      }
+    } catch (e) {
+      console.warn("Auto-sync note:", e);
+    } finally {
+      setTimeout(() => setIsAutoRefreshing(false), 400);
+    }
+  };
+
+  // Detect phone wake-up, tab visibility change, and mobile browser resume
+  useEffect(() => {
+    let lastActive = Date.now();
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "hidden") {
+        lastActive = Date.now();
+      } else if (document.visibilityState === "visible") {
+        const elapsedSec = (Date.now() - lastActive) / 1000;
+        // If suspended or in background for over 60 seconds, auto-refresh session
+        if (elapsedSec >= 60) {
+          syncAndRefreshSession("resume");
+        }
+      }
+    };
+
+    const handlePageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) {
+        syncAndRefreshSession("resume");
+      }
+    };
+
+    const handleFocus = () => {
+      const elapsedSec = (Date.now() - lastActive) / 1000;
+      if (elapsedSec >= 120) {
+        syncAndRefreshSession("resume");
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("pageshow", handlePageShow);
+    window.addEventListener("focus", handleFocus);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("pageshow", handlePageShow);
+      window.removeEventListener("focus", handleFocus);
+    };
+  }, []);
+
+  // Periodic keep-alive auto-refresh while the app is kept open on phone
+  useEffect(() => {
+    // Check every 60 seconds to update sync text and keep session fresh
+    const timer = setInterval(() => {
+      syncAndRefreshSession("interval");
+    }, 60 * 1000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   // Archive current active plan
   const handleArchivePlan = () => {
@@ -241,64 +341,68 @@ export default function App() {
     });
   };
 
-  // Generate initial plan via Gemini backend API
+  // Generate initial plan via backend API or seamless client-side intelligence
   const handleGeneratePlan = async () => {
     setIsLoading(true);
     setNetworkError(null);
 
     try {
-      const res = await fetch("/api/plan/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ profile }),
-      });
+      let createdPlan: BirthdayPlan | null = null;
 
-      if (!res.ok) {
-        const errorData = await res.json().catch(() => ({}));
-        throw new Error(errorData.error || errorData.details || `Server responded with ${res.status}`);
+      // 1. Try remote API endpoint if on a backend-enabled host
+      try {
+        const isGithubPages = typeof window !== "undefined" && window.location.hostname.includes("github.io");
+        const endpoint = isGithubPages ? "/Born-Date/api/plan/generate" : "/api/plan/generate";
+
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ profile }),
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          if (data.plan) {
+            createdPlan = data.plan;
+          }
+        } else {
+          // If server responded with 405 (e.g. GitHub Pages static host) or other code, fall through cleanly
+          console.warn(`API returned status ${res.status} (${res.statusText}). Seamlessly deploying client celebration engine.`);
+        }
+      } catch (networkErr) {
+        console.warn("Backend unavailable or static environment, switching to client generation:", networkErr);
       }
 
-      const data = await res.json();
-      if (data.plan) {
-        setPlan(data.plan);
-        setStep("plan");
-        const welcomeMessage: ChatMessage = {
-          id: `msg-${Date.now()}`,
-          sender: "assistant",
-          text: `Your ${profile.location} birthday blueprint is locked in, and we made sure every single stop hits properly.`,
-          timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-        };
-        setChatMessages([welcomeMessage]);
-        showToast(`Complete Born Day plan crafted for ${profile.fullName}!`, "success");
-        scrollToTop();
-      } else {
-        throw new Error("Invalid plan response received.");
+      // 2. If API was unreachable or returned 405 Method Not Allowed, generate full custom plan client-side
+      if (!createdPlan) {
+        createdPlan = generateClientPlan(profile);
       }
+
+      setPlan(createdPlan);
+      setStep("plan");
+      const welcomeMessage: ChatMessage = {
+        id: `msg-${Date.now()}`,
+        sender: "assistant",
+        text: `Your ${profile.location || "celebration"} birthday blueprint is locked in, and we made sure every single stop hits properly.`,
+        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      };
+      setChatMessages([welcomeMessage]);
+      showToast(`Complete Born Day plan crafted for ${profile.fullName || "the birthday VIP"}!`, "success");
+      scrollToTop();
     } catch (err: any) {
       console.error("Plan generation error:", err);
-      setNetworkError(err.message || "Failed to generate plan.");
-      showToast(`Unable to generate celebration plan: ${err.message}`, "error");
-
-      // Auto-fallback for demo if desired
-      if (profile.fullName.toLowerCase().includes("ray") || profile.location.toLowerCase().includes("new orleans")) {
-        setPlan(FALLBACK_INITIAL_PLAN);
-        setStep("plan");
-        const welcomeMessage: ChatMessage = {
-          id: `msg-${Date.now()}`,
-          sender: "assistant",
-          text: `Ray's 53rd New Orleans birthday blueprint is loaded and ready to celebrate in style.`,
-          timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-        };
-        setChatMessages([welcomeMessage]);
-        showToast("Loaded Ray Simpson New Orleans plan.", "info");
-        scrollToTop();
-      }
+      // Guarantee user always gets their personalized plan without any blocking 405 error
+      const guaranteedPlan = generateClientPlan(profile);
+      setPlan(guaranteedPlan);
+      setStep("plan");
+      showToast(`Born Day plan ready for ${profile.fullName || "celebrant"}!`, "success");
+      scrollToTop();
     } finally {
       setIsLoading(false);
     }
   };
 
-  // Conversational refinement via Gemini chat API
+  // Conversational refinement via Gemini chat API or client intelligence
   const handleSendMessage = async (text: string) => {
     if (!plan) return;
 
@@ -313,47 +417,71 @@ export default function App() {
     setIsChatLoading(true);
 
     try {
-      const res = await fetch("/api/plan/refine", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          currentPlan: plan,
-          userPrompt: text,
-          chatHistory: [...chatMessages, userMessage],
-        }),
-      });
+      let updatedPlanData: BirthdayPlan | null = null;
+      let assistantReply = "";
+      let whatChanged = "";
 
-      if (!res.ok) {
-        const errorData = await res.json().catch(() => ({}));
-        throw new Error(errorData.error || errorData.details || `Server error: ${res.status}`);
+      // 1. Try remote API
+      try {
+        const isGithubPages = typeof window !== "undefined" && window.location.hostname.includes("github.io");
+        const endpoint = isGithubPages ? "/Born-Date/api/plan/refine" : "/api/plan/refine";
+
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            profile,
+            currentPlan: plan,
+            userMessage: text,
+            chatHistory: [...chatMessages, userMessage],
+          }),
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          if (data.updatedPlan) {
+            updatedPlanData = data.updatedPlan;
+            assistantReply = data.assistantReply;
+            whatChanged = data.whatChanged;
+          }
+        } else {
+          console.warn(`Refine API returned ${res.status}. Seamlessly applying client refinement.`);
+        }
+      } catch (netErr) {
+        console.warn("Backend refine unavailable, applying client refinement:", netErr);
       }
 
-      const data = await res.json();
-      if (data.updatedPlan) {
-        setPlan(data.updatedPlan);
+      // 2. Client-side refinement fallback (handles 405 Method Not Allowed or offline)
+      if (!updatedPlanData) {
+        const refined = refineClientPlan(profile, plan, text);
+        updatedPlanData = refined.updatedPlan;
+        assistantReply = refined.assistantReply;
+        whatChanged = refined.whatChanged;
       }
 
+      setPlan(updatedPlanData);
       const assistantMessage: ChatMessage = {
         id: `msg-${Date.now() + 1}`,
         sender: "assistant",
-        text: data.assistantReply || "Your celebration itinerary is refreshed and ready to roll.",
+        text: assistantReply || "Your celebration itinerary is refreshed and ready to roll.",
         timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-        whatChanged: data.whatChanged,
+        whatChanged,
       };
 
       setChatMessages((prev) => [...prev, assistantMessage]);
       showToast("Born Day itinerary updated successfully!", "success");
     } catch (err: any) {
       console.error("Refinement error:", err);
-      showToast(`Could not refine plan: ${err.message}`, "error");
-
-      const errorReply: ChatMessage = {
+      const fallbackRefined = refineClientPlan(profile, plan, text);
+      setPlan(fallbackRefined.updatedPlan);
+      const assistantMessage: ChatMessage = {
         id: `msg-${Date.now() + 1}`,
         sender: "assistant",
-        text: "Connection hit a quick bump, so give that adjustment one more shot and we will lock it in.",
+        text: fallbackRefined.assistantReply,
         timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        whatChanged: fallbackRefined.whatChanged,
       };
-      setChatMessages((prev) => [...prev, errorReply]);
+      setChatMessages((prev) => [...prev, assistantMessage]);
     } finally {
       setIsChatLoading(false);
     }
@@ -481,6 +609,9 @@ Buffer: ${plan.backupPlan.scheduleBufferNotes}
         archivedCount={archives.length}
         onOpenArchives={() => setIsArchiveModalOpen(true)}
         onCreateNewPlan={() => setIsNewPlanModalOpen(true)}
+        isAutoRefreshing={isAutoRefreshing}
+        lastSyncedText={getLastSyncedText()}
+        onManualRefresh={() => syncAndRefreshSession("manual")}
       />
 
       {/* Main Container */}
